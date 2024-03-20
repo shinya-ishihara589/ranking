@@ -1,0 +1,289 @@
+*{
+	/*border:	1px solid;*/
+	width:			875px;
+	margin:			0 auto;
+	padding:		0;
+	font-family:	"HGP創英角ﾎﾟｯﾌﾟ体","MS UI Gothic";
+	font-weight:	100;
+}
+
+
+/* 全体の制御 */
+body{
+	padding-left:		9px;
+	background-color:	#99ccff;
+}
+
+img.icon{
+	width:			55px;
+	margin:			10px;
+	border-radius:	10px;
+}
+
+.name{
+	width:			150px;
+	margin-top:		46px;
+	font-size:		16px;
+	float:			left;
+}
+
+/* ヘッダーの設定 */
+/* タイトルの設定 */
+header{
+	text-align:		center;
+	color:			white;
+	font-style:		italic;
+}
+
+h1{
+	height:				100px;	/* 縦のサイズの設定 */
+	line-height:		100px;	/* 文字の縦の位置の設定 */
+	text-shadow:		5px 5px 10px #999999;
+	letter-spacing:		10px;
+	
+}
+
+
+/* メニューの設定 */
+nav ul#menu{
+	list-style:			none;
+	float:				left;
+}
+
+nav ul li a#top{
+	color:				#ffffff;
+}
+
+nav ul li a#letter{
+	color:				#ffffff;
+}
+
+
+nav ul li{
+	width:				19%;
+	height:				50px;
+	margin-right:		8.7px;
+	line-height:		50px;
+	float:				left;
+}
+
+nav ul li a{
+	display:			block;
+	border-left:		1px solid #fff;
+	border-bottom:		1px solid #fff;
+	text-decoration:	none;
+	color:				white;
+	width:				100%;
+	font-size:			32px;
+	border-radius:		25px;
+	letter-spacing:		5px;
+	text-shadow:		5px 5px 10px #999999;
+}
+
+nav ul li#setting a{
+	border-right:		1px solid #fff;
+}
+
+nav ul li a:hover{
+	background-color:	#88bbee;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* アサイドの設定 */
+/* マイプロフィールの設定 */
+#cont-prof{
+	width:	250px;
+	float:	left;
+	color:	#eeeeee;
+}
+
+aside#my-aside{
+	width:				275px;
+	margin-top:			25px;
+	border-radius:		10px;
+	float:				left;
+	border:				1px solid white;
+	color:				#333333;
+	background-color:	#ccffff;
+}
+
+aside#my-aside h2 img.icon{
+	float:		left;
+}
+
+aside#my-aside p#my-prof{
+	width:			auto;
+	height:			125px;
+	margin-left:	10px;
+	font-size:		15px;
+	float:			left;
+}
+
+/* 友達一覧の設定 */
+aside#friend-aside{
+	width:				275px;
+	margin-top:			25px;
+	border-radius:		10px;
+	float:				left;
+	clear:				left;
+	border:				1px solid white;
+	color:				#333333;
+	background-color:	#ccffff;
+}
+
+aside#friend-aside h3 p.friend-head{
+	width:				275px;
+	height:				50px;
+	line-height:		50px;
+	font-size:			21px;
+	color:				#333333;
+	float:				left;
+	clear:				left;
+	text-align:			center;
+	text-shadow:		5px 5px 10px #999999;
+}
+
+aside#friend-aside div{
+	width:		275px;
+	height:		75px;
+	float:		left;
+	clear:		left;
+}
+
+aside#friend-aside div.friend-list-odd{
+	background-color:	#aadddd;
+}
+
+aside#friend-aside div img.icon{
+	float:		left;
+	clear:		left;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* メインコンテンツの設定 */
+article{
+	width:				622px;
+	float:				right;
+}
+
+article div.contents{
+	width:				622px;
+	height:				auto;
+	float:				right;
+	text-align:			right;
+}
+
+article div p.icon{
+	width:				620px;
+	margin-top:			25px;
+}
+
+article div div.comment,
+article div div.my-comment{
+	width:				465px;
+	margin-top:			25px;
+	margin-left:		50px;
+	padding:			12.5px;
+	border-radius:		15px;
+	font-size:			18px;
+	color:				#333333;
+	float:				left;
+	text-align:			left;
+	background-color:	#ccffff;
+	border:				1px solid white;
+}
+
+
+article div div p.cmt-nam{
+	font-size:			18px;
+	margin-bottom:		2px;
+}
+
+
+
+article div div p.cmt-nam,
+article div div p.cmt-txt,
+article div div p.cmt-tim{
+	width:				auto;
+}
+
+
+article div div p.cmt-tim{
+	text-align:			right;
+	font-size:			14px;
+	margin-top:			5px;
+}
+
+article div p.icon img.icon{
+	width:			50px;
+	margin-top:		0px;
+	margin-right:	15px;
+}
+
+
+
+
+
+/* フッターの設定 */
+footer{
+	color:			white;
+	height:			100px;
+	clear:			both;
+}
+
+footer form input#search-txt{
+	width:				220px;
+	height:				30px;
+	margin-top:			52px;
+	padding-left:		8px;
+	border-radius:		7.5px;
+	float:				left;
+}
+
+footer form input#search-box{
+	width:				50px;
+	height:				30px;
+	margin-left:		8px;
+	margin-top:			52px;
+	border-radius:		7.5px;
+	float:				left;
+}
+
+footer p#admin{
+	width:				auto;
+	text-align:			right;
+	font-size:			25px;
+	margin-right:		12px;
+	margin-top:			52px;
+	float:				right;
+	text-shadow:		5px 5px 10px #999999;
+}
+
+
+
+
+
+
+
+
+
+
+

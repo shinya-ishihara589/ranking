@@ -1,0 +1,190 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+class Home extends Model
+{
+    use HasFactory;
+
+    private $searchWords;   //あいまい検索ワード
+    private $mode;          //画面の種類
+    private $offset;        //取得開始数
+    private $userId;        //ユーザーID
+
+    /**
+     * コンストラクタ
+     * @param String あいまい検索ワード
+     * @param String 画面の種類
+     * @param Integer 取得開始数
+     */
+    function __construct(string $words = null, string $mode, int $offset = 0)
+    {
+        //全角スペースを半角スペースに置換する
+        $words = str_replace([' ', '　'], ' ', $words);
+
+        //半角スペース区切りで配列を作る
+        $words = explode(' ', $words);
+
+        //あいまい検索用のワードを生成する
+        $searchWords = '';
+        foreach ($words as $no => $word) {
+            //ワードが空文字でない場合は検索ワードを追加する
+            if ($word !== '') {
+                $searchWords .= "^.*{$word}.*";
+            }
+            //ワードが最後の配列でない場合は「,」を追加する
+            if (count($words) !== ($no + 1)) {
+                $searchWords .= "|";
+            }
+        }
+
+        //メンバ変数に値を入れる
+        $this->searchWords = $searchWords;
+        $this->mode = $mode;
+        $this->offset = $offset;
+        $this->userId = Auth::id();
+    }
+
+    /**
+     * ホーム情報を取得する
+     * @return Database ホーム情報
+     */
+    public function getHomeData(): array
+    {
+        //ホームで使用する情報のSQLを生成する
+        $sql = "SELECT * FROM ( ";
+
+        //各画面のSQL文を取得する
+        if ($this->mode == 'vote') {
+            $sql .= $this->getSqlVotesTable();
+        } else if ($this->mode == 'comment') {
+            $sql .= $this->getSqlCommentsTable();
+        } else if ($this->mode == 'discussion') {
+            $sql .= $this->getSqlDiscussionsTable();
+        } else {
+            $sql .= $this->getSqlVotesTable() . "UNION";
+            $sql .= $this->getSqlCommentsTable() . "UNION";
+            $sql .= $this->getSqlDiscussionsTable();
+        }
+
+        $sql .= " ) AS hone_data ORDER BY datetime DESC LIMIT 10 OFFSET $this->offset;";
+
+        return DB::select($sql);
+    }
+
+    /**
+     * ホーム情報(投票)のSQLを取得する
+     * @return String ホーム情報(投票)のSQL
+     */
+    private function getSqlVotesTable(): string
+    {
+        $sql = "
+            (SELECT
+                'vote' AS home,
+                null AS comment,
+                votes.datetime,
+                votes.id,
+                votes.item_id,
+                null AS parent_id,
+                null AS status,
+                null AS text,
+                null AS type,
+                votes.user_id,
+                items.name
+            FROM
+                votes
+            LEFT JOIN 
+                items
+            ON
+                votes.item_id = items.id
+            WHERE
+                items.user_id = $this->userId
+            AND
+                items.id IS NOT NULL";
+
+        if (!empty($this->searchWords)) {
+            $sql .= " AND items.name REGEXP'($this->searchWords)'";
+        }
+
+        $sql .= ')';
+
+        return $sql;
+    }
+
+    /**
+     * ホーム情報(コメント)のSQLを取得する
+     * @return String ホーム情報(コメント)のSQL
+     */
+    private function getSqlCommentsTable(): string
+    {
+        $sql = "
+            (SELECT
+                'comment' AS home,
+                comments.comment,
+                comments.datetime,
+                comments.id,
+                null AS item_id,
+                comments.parent_id,
+                null AS status,
+                null AS text,
+                null AS type,
+                comments.user_id,
+                null AS name
+            FROM
+                comments
+            WHERE
+                user_id = $this->userId";
+
+        if (!empty($this->searchWords)) {
+            $sql .= " AND comments.comment REGEXP'($this->searchWords)'";
+        }
+
+        $sql .= ')';
+
+        return $sql;
+    }
+
+    /**
+     * ホーム情報(議論)のSQLを取得する
+     * @return String ホーム情報(議論)のSQL
+     */
+    private function getSqlDiscussionsTable(): string
+    {
+        $sql = "
+            (SELECT
+                'discussion' AS home,
+                null AS comment,
+                discussions.datetime,
+                discussions.id,
+                discussions.item_id,
+                null AS parent_id,
+                discussions.status,
+                discussions.text,
+                discussions.type,
+                discussions.user_id,
+                items.name
+            FROM
+                discussions
+            LEFT JOIN
+                items
+            ON
+                discussions.item_id = items.id
+            WHERE
+                items.user_id = $this->userId
+            AND
+                items.id IS NOT NULL";
+
+        if (!empty($this->searchWords)) {
+            $sql .= " AND items.name REGEXP'($this->searchWords)' OR discussions.text REGEXP'($this->searchWords)'";
+        }
+
+        $sql .= ')';
+
+        return $sql;
+    }
+}
