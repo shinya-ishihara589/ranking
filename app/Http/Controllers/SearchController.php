@@ -15,10 +15,10 @@ class SearchController extends Controller
     public function index(Request $request): object
     {
         //検索情報を取得する
-        $searchModel = new Search($request->words);
+        $searchModel = new Search($request);
         $searchData = $searchModel->getSearchData();
 
-        return view('search.index', compact(['searchData', 'request']));
+        return view('search.index', compact(['searchData']));
     }
 
     /**
@@ -27,10 +27,10 @@ class SearchController extends Controller
      * @param String 画面の種類
      * @return Array ホームの追加情報
      */
-    public function acquisition(Request $request): array
+    public function get(Request $request): array
     {
         //検索の追加情報を取得する
-        $searchModel = new Search($request->words, $request->offset);
+        $searchModel = new Search($request);
         $searchData = $searchModel->getSearchData();
 
         return compact(['searchData', 'request']);

@@ -10,28 +10,26 @@ class HomeController extends Controller
     /**
      * ホーム画面に遷移する
      * @param Object ホーム取得情報
-     * @param String 画面の種類
      * @return Object ホーム情報
      */
-    public function index(Request $request, string $mode = 'all'): object
+    public function index(Request $request): object
     {
         //ホーム情報を取得する
-        $homeModel = new Home($request->words, $mode);
+        $homeModel = new Home($request);
         $homeData = $homeModel->getHomeData();
 
-        return view('home.index', compact(['homeData', 'request', 'mode']));
+        return view('home.index', compact(['homeData', 'request']));
     }
 
     /**
-     * ホームの追加情報を取得する
+     * ホーム情報を取得する
      * @param Object ホーム取得情報
-     * @param String 画面の種類
-     * @return Array ホームの追加情報
+     * @return Object ホーム情報
      */
-    public function acquisition(Request $request, string $mode = 'all'): array
+    public function get(Request $request): array
     {
-        //ホームの追加情報を取得する
-        $homeModel = new Home($request->words, $mode, $request->offset);
+        //ホーム情報を取得する
+        $homeModel = new Home($request);
         $homeData = $homeModel->getHomeData();
 
         return compact(['homeData', 'request']);

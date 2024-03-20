@@ -8,12 +8,12 @@
             </div>
             <div class="modal-body">
                 <div>
-                    {!! Form::text('modal-item', '', ['id' => 'modal-item', 'class' => 'form-control' . ($errors->has('modal-item') ? ' is-invalid' : '')]) !!}
-                    {!! $errors->first('modal-item', '<span class="invalid-feedback" role="alert"><strong>:message</strong></span>') !!}
+                    {!! Form::text('modal_item_name', '', ['id' => 'modal-item-name', 'class' => 'form-control' . ($errors->has('modal_item_name') ? ' is-invalid' : '')]) !!}
+                    {!! $errors->first('modal_item_name', '<span class="invalid-feedback" role="alert"><strong>:message</strong></span>') !!}
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-sm" onClick="clickButtonAddItem('{{ $mode }}', {{ $itemId }})">追加</button>
+                <button type="button" class="btn btn-primary btn-sm" onClick="clickAddItemButtonRanking({{ $itemId }})">追加</button>
             </div>
         </div>
     </div>

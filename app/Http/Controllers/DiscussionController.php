@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Common;
-use App\Models\Item;
-use App\Models\Search;
 use App\Models\Discussion;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class DiscussionController extends Controller
@@ -39,10 +35,12 @@ class DiscussionController extends Controller
     {
         //議論詳細画面を取得する
         $discussionQuery = new Discussion;
-        $discussionData = $discussionQuery->with(['comments' => function ($query) {
-            $query->orderByDesc('datetime')->limit(10);
-        }])->find($discussionId);
-
+        $discussionData = $discussionQuery->with([
+            'item',
+            'comments' => function ($query) {
+                $query->orderByDesc('datetime')->limit(10);
+            }
+        ])->find($discussionId);
         return view('discussions.detail', compact(['discussionData']));
     }
 }

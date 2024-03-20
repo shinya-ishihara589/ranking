@@ -28,7 +28,7 @@
     <tbody class="fs-6" id="discussion-body-table">
         @foreach ($discussionData as $no => $discussion)
         <tr onClick="getDiscussionDetail({{ $discussion->id }});">
-            <th scope="row" class="text-center">{{ $no + 1 }}</th>
+            <th class="text-center">{{ $no + 1 }}</th>
             <td class="text-center">{{ $discussion->item->name }}</td>
             <td class="text-left">{{ $discussion->text }}</td>
             <td class="text-center">{{ count($discussion->comments) }}</td>

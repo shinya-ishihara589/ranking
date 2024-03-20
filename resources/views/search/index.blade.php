@@ -15,11 +15,11 @@
 
 <!-- ランキング -->
 <table class="table align-middle">
-    <thead class="fs-6 fw-bold">
+    <thead class="fs-5 fw-bold">
         <tr>
-            <th scope="col" class="col-md-1 text-center text-primary">種類</th>
-            <th scope="col" class="col-md-4 text-primary">行動</th>
-            <th scope="col" class="col-md-2 text-center text-primary">日時</th>
+            <th scope="col" class="col-md-1 text-center">種類</th>
+            <th scope="col" class="col-md-4">行動</th>
+            <th scope="col" class="col-md-2 text-center">日時</th>
         </tr>
     </thead>
     <tbody class="fs-6" id="search-body-table">
@@ -50,7 +50,7 @@
     </tbody>
     <tfoot class="fs-6">
         <tr>
-            <td colspan="3" id="search-foot-table" class="text-center text-primary" onClick="getUpdateData()">
+            <td colspan="3" id="search-foot-table" class="text-center text-primary" onClick="clickAcquisitionButtonSearch()">
                 <i class="nav-icon bi-arrow-clockwise"></i>
                 取得する
                 <i class="nav-icon bi-arrow-counterclockwise"></i>
@@ -66,4 +66,4 @@
 <!--フットの呼び出し-->
 @include('commons.foot')
 
-<script src="/js/acquisitions/search.js"></script>
+<script src="/js/search/update-table.js"></script>

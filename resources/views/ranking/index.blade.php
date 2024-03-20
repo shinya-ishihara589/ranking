@@ -16,15 +16,15 @@
 <!-- タイトル -->
 @if ($itemData)
 <table class="table align-middle">
-    <thead class="fs-5 fw-bold">
+    <thead class="fs-4 fw-bold">
         <tr>
             <th scope="col" class="col-md-1 text-center">
                 <button type="button" class="btn btn-outline-warning btn-sm rounded-pill" data-bs-target="#apply-send-modal" data-bs-toggle="modal">申請</button>
             </th>
             <th scope="col" class="col-md-4 text-primary">{{ $itemData->name }}</th>
-            <th scope="col" class="col-md-1 text-center text-primary" id="ranking-body-table-vote">{{ $itemData->votes_count }}</th>
+            <th scope="col" class="col-md-1 text-center text-primary" id="ranking-head-table-vote">{{ $itemData->votes_count }}</th>
             <th scope="col" class="col-md-1 text-center text-primary">
-                <button type="button" class="btn btn-outline-success btn-sm rounded-pill" onClick="clickBtnVote('{{ $mode }}', {{ $itemData->id }}, {{ $itemId }})">投票</button>
+                <button type="button" class="btn btn-outline-success btn-sm rounded-pill" onClick="clickButtonVote({{ $itemData->id }})">投票</button>
             </th>
         </tr>
     </thead>
@@ -33,7 +33,7 @@
 
 <!-- ランキング -->
 <table class="table align-middle">
-    <thead class="fs-6 fw-bold">
+    <thead class="fs-5 fw-bold">
         <tr>
             <th scope="col" class="col-md-1 text-center">順位</th>
             <th scope="col" class="col-md-4">名前</th>
@@ -43,23 +43,23 @@
             </th>
         </tr>
     </thead>
-    <tbody class="fs-6" id="ranking-body-table-child">
+    <tbody class="fs-6" id="ranking-body-table">
         @foreach ($rankingData as $no => $ranking)
         <tr>
             <th scope="row" class="text-center">{{ $no + 1 }}</th>
             <td>
-                <a href="/ranking/{{ $mode }}{{ isset($ranking->id) ? '/' . $ranking->id : '' }}">{{ $ranking->name }}</a>
+                <a href="/ranking{{ isset($ranking->id) ? '/' . $ranking->id : '' }}">{{ $ranking->name }}</a>
             </td>
             <td class="text-center">{{ isset($ranking->votes_count) ? $ranking->votes_count : 0 }}</td>
             <td class="text-center">
-                <button type="button" class="btn btn-outline-success btn-sm rounded-pill" onClick="clickBtnVote('{{ $mode }}', {{ $ranking->id }}, {{ $itemId }})">投票</button>
+                <button type="button" class="btn btn-outline-success btn-sm rounded-pill" onClick="clickButtonVote({{ $ranking->id }})">投票</button>
             </td>
         </tr>
         @endforeach
     </tbody>
     <tfoot class="fs-6">
         <tr>
-            <td colspan="4" id="home-foot-table" class="text-center text-primary" onClick="getUpdateData('{{ $mode }}')">
+            <td colspan="4" id="ranking-foot-table" class="text-center text-primary" onClick="clickAcquisitionButtonRanking()">
                 <i class="nav-icon bi-arrow-clockwise"></i>
                 取得する
                 <i class="nav-icon bi-arrow-counterclockwise"></i>
@@ -86,6 +86,5 @@
 
 <script src="/js/sends/apply.js"></script>
 <script src="/js/adds/item.js"></script>
-<script src="/js/vote.js"></script>
 
-<script src="/js/acquisitions/ranking.js"></script>
+<script src="/js/ranking/update-table.js"></script>

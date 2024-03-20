@@ -4,11 +4,10 @@
     <div class="text-left">
         {{ Breadcrumbs::render('search.index') }}
     </div>
-    <div class="text-left">
-        {!! Form::open(['url' => ['/search'], 'method' => 'get', 'class' => 'd-flex']) !!}
-        {!! Form::text('words', $request->words, ['class' => 'form-control me-1 rounded-pill', 'id' => 'search-words', 'placeholder' => '検索ワード']) !!}
-        {!! Form::submit('検索', ['class'=>'btn btn-outline-success rounded-pill']) !!}
-        {!! Form::close() !!}
+    <div class="mt-3 d-flex">
+        {!! Form::text('words', '', ['class' => 'form-control me-1 rounded-pill', 'id' => 'search-words', 'placeholder' => '検索ワード']) !!}
+        {!! Form::button('リセット', ['class'=>'btn btn-outline-secondary rounded-pill me-1 col-lg-1', 'onClick' => 'clickResetButtonSearch()']) !!}
+        {!! Form::button('検索', ['class'=>'btn btn-outline-primary rounded-pill col-lg-1', 'onClick' => 'clickSearchButtonSearch()']) !!}
     </div>
 </header>
 @endsection

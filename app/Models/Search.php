@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class Search extends Model
+class Search extends BaseModel
 {
     use HasFactory;
 
@@ -21,30 +21,11 @@ class Search extends Model
      * @param String 画面の種類
      * @param Integer 取得開始数
      */
-    function __construct(string $words = null, int $offset = 0)
+    function __construct(object $request)
     {
-        //全角スペースを半角スペースに置換する
-        $words = str_replace([' ', '　'], ' ', $words);
-
-        //半角スペース区切りで配列を作る
-        $words = explode(' ', $words);
-
-        //あいまい検索用のワードを生成する
-        $searchWords = '';
-        foreach ($words as $no => $word) {
-            //ワードが空文字でない場合は検索ワードを追加する
-            if ($word !== '') {
-                $searchWords .= "^.*{$word}.*";
-            }
-            //ワードが最後の配列でない場合は「,」を追加する
-            if (count($words) !== ($no + 1)) {
-                $searchWords .= "|";
-            }
-        }
-
         //メンバ変数に値を入れる
-        $this->searchWords = $searchWords;
-        $this->offset = $offset;
+        $this->searchWords = $this->getSearchWordsString($request->words);
+        $this->offset = ($request->offset) ? $request->offset : 0;
         $this->userId = Auth::id();
     }
 

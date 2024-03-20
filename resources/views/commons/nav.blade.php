@@ -7,13 +7,13 @@
             </a>
         </div>
         <li>
-            <a href="/home" class="nav-link">
+            <a href="/" class="nav-link">
                 <i class="nav-icon bi-house-door"></i>
                 ホーム
             </a>
         </li>
         <li>
-            <a href="/ranking/all" class="nav-link">
+            <a href="/ranking" class="nav-link">
                 <i class="nav-icon bi-clipboard-data"></i>
                 ランキング
             </a>

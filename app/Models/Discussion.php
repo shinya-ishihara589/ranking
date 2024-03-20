@@ -26,10 +26,4 @@ class Discussion extends Model
     {
         return $this->hasOne(Item::class, 'id', 'item_id');
     }
-
-    public static function search($request)
-    {
-        $discussions = Discussion::get();
-        return $discussions;
-    }
 }

@@ -13,23 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//ログアウト
+Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
+
 Auth::routes(['register' => false, 'reset' => false, 'verify' => false]);
 
 //ホーム
-Route::get('/home/{mode?}', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
-Route::post('/home/{mode?}', [App\Http\Controllers\HomeController::class, 'acquisition']);
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
+Route::post('/get', [App\Http\Controllers\HomeController::class, 'get']);
 
 //ランキング
-Route::get('/ranking/{mode}/{itemId?}', [App\Http\Controllers\RankingController::class, 'index'])->name('ranking.index');
-Route::post('/ranking/{mode}/{itemId?}', [App\Http\Controllers\RankingController::class, 'acquisition']);
-Route::post('/ranking/{mode}/{voteId}/{itemId?}', [App\Http\Controllers\RankingController::class, 'vote']);
-
-Route::post('/item/add/{mode}/{itemId?}', [App\Http\Controllers\RankingController::class, 'store']);
+Route::get('/ranking/{itemId?}', [App\Http\Controllers\RankingController::class, 'index'])->name('ranking.index');
+Route::post('/ranking/{itemId?}', [App\Http\Controllers\RankingController::class, 'get']);
+Route::post('/ranking/vote/{voteId?}', [App\Http\Controllers\RankingController::class, 'vote']);
+Route::post('/item/add/{itemId?}', [App\Http\Controllers\ItemController::class, 'store']);
 Route::post('/apply/send', [App\Http\Controllers\ApplyController::class, 'send']);
 
 //検索
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('search.index');
-Route::post('/search', [App\Http\Controllers\SearchController::class, 'acquisition']);
+Route::post('/search', [App\Http\Controllers\SearchController::class, 'get']);
 
 //通知
 Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');
@@ -50,6 +52,3 @@ Route::post('/setting', [App\Http\Controllers\SettingController::class, 'update'
 
 //コメント
 Route::post('/comments/send/{parent_id?}', [App\Http\Controllers\CommentController::class, 'send']);
-
-//ログアウト
-Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);

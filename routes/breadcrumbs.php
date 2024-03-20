@@ -27,11 +27,11 @@ Breadcrumbs::for('home.discussion', function (BreadcrumbTrail $trail) {
 });
 
 //ランキング画面 第n階層
-Breadcrumbs::for('ranking.index', function (BreadcrumbTrail $trail, array $breadcrumbs, string $mode) {
+Breadcrumbs::for('ranking.index', function (BreadcrumbTrail $trail, array $breadcrumbs) {
     $trail->parent('home.index');
-    $trail->push('ランキング', route('ranking.index', $mode));
+    $trail->push('ランキング', route('ranking.index'));
     for ($i = count($breadcrumbs) - 1; 0 <= $i; $i--) {
-        $trail->push($breadcrumbs[$i]['name'], route('ranking.index', "{$mode}/{$breadcrumbs[$i]['id']}"));
+        $trail->push($breadcrumbs[$i]['name'], route('ranking.index', "{$breadcrumbs[$i]['id']}"));
     }
 });
 
@@ -44,7 +44,7 @@ Breadcrumbs::for('search.index', function (BreadcrumbTrail $trail) {
 //通知 第2階層
 Breadcrumbs::for('notifications.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home.index');
-    $trail->push('検索', route('notifications.index'));
+    $trail->push('通知', route('notifications.index'));
 });
 
 //議論 第2階層
@@ -54,20 +54,8 @@ Breadcrumbs::for('discussions.index', function (BreadcrumbTrail $trail) {
 });
 
 //議論 第3階層
-Breadcrumbs::for('discussions.detail', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('discussions.detail', function (BreadcrumbTrail $trail, $itemData) {
     $trail->parent('discussions.index');
+    $trail->push('詳細', 'discussions.detail');
     $trail->push('詳細', route('discussions.detail'));
 });
-
-// //プロフィール 第2階層
-// Breadcrumbs::for('site.category.article', function (BreadcrumbTrail $trail, Category $category) {
-//     $trail->parent('site.category', $category);
-//     $trail->push("{$category->name}新着記事一覧", route('site.category.article', $category->id));
-// });
-
-// //設定 第2階層
-// Breadcrumbs::for('site.category.article', function (BreadcrumbTrail $trail, Category $category) {
-//     $trail->parent('site.category', $category);
-//     $trail->push("{$category->name}新着記事一覧", route('site.category.article', $category->id));
-// });
-//

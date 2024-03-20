@@ -2,51 +2,32 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class Ranking extends Model
+class Ranking extends BaseModel
 {
     use HasFactory;
 
     private $searchWords;   //あいまい検索ワード
-    private $mode;          //画面の種類
-    private $limit;         //取得開始数
+    private $searchDate;    //検索期間
+    private $offset;        //取得開始数
+    private $limit;         //取得数
     private $itemId;        //項目ID
-    private $userId;        //ユーザーID
 
     /**
      * コンストラクタ
-     * @param String あいまい検索ワード
-     * @param Integer 取得開始数
-     * @param String ユーザーID
+     * @param Object 検索情報
+     * @param String 項目ID
      */
-    function __construct(string $words = null, string $mode, int $itemId = null, int $limit = 10)
+    function __construct(object $request, int $itemId = null)
     {
-        //全角スペースを半角スペースに置換する
-        $words = str_replace([' ', '　'], ' ', $words);
-
-        //半角スペース区切りで配列を作る
-        $words = explode(' ', $words);
-
-        //あいまい検索用のワードを生成する
-        $searchWords = [];
-        foreach ($words as $word) {
-            //ワードが空文字でない場合は検索ワードを追加する
-            if ($word !== '') {
-                $searchWords[] = $word;
-            }
-        }
-
-        //画面の
-
-        $this->searchWords = $searchWords;
-        $this->limit = $limit;
-        $this->mode = $mode;
+        $this->searchWords = $this->getSearchWordsArray($request->words);
+        $this->searchDate = $this->getSearchDate($request->mode);
+        $this->offset = ($request->offset) ? $request->offset : 0;
+        $this->limit = $this->getSearchLimit($request->limit);
         $this->itemId = $itemId;
-        $this->userId = Auth::id();
     }
 
     /**
@@ -55,8 +36,13 @@ class Ranking extends Model
      */
     public function getRankingData(): object
     {
+        //項目に紐づく投票数を取得する
         $rankingQuery = Item::withCount(['votes' => function ($query) {
-            $query->select(DB::raw("COUNT(*)"));
+            $query
+                ->select(DB::raw("COUNT(*)"))
+                ->when($this->searchDate, function ($query) {
+                    $query->where('datetime', '>=', $this->searchDate);
+                });
         }]);
 
         //あいまい検索をする
@@ -64,10 +50,12 @@ class Ranking extends Model
             $query->whereIn('name', $this->searchWords);
         });
 
-        $rankingQuery
-            ->where('item_id', $this->itemId)
-            ->limit($this->limit)
-            ->orderBy('votes_count', 'DESC');
+        $rankingQuery->where('item_id', $this->itemId)
+            ->when($this->limit, function ($query) {
+                $query->limit($this->limit);
+            })->when($this->limit, function ($query) {
+                $query->offset($this->offset);
+            })->orderBy('votes_count', 'DESC');
 
         return $rankingQuery->get();
     }
@@ -92,14 +80,48 @@ class Ranking extends Model
 
     /**
      * 項目IDから項目に紐づく投票数の合計を取得する
-     * @param BigInteger 項目ID
      * @return Integer 投票数の合計(votes_count)
      */
-    public function getItemData($itemId)
+    public function getItemData()
     {
+        //項目に紐づく投票数を取得する
         $rankingQuery = Item::withCount(['votes' => function ($query) {
-            $query->select(DB::raw("COUNT(*)"));
+            $query
+                ->select(DB::raw("COUNT(*)"))
+                ->when($this->searchDate, function ($query) {
+                    $query->where('datetime', '>=', $this->searchDate);
+                });
         }]);
-        return $rankingQuery->where('id', $itemId)->first();
+        return $rankingQuery->where('id', $this->itemId)->first();
+    }
+
+    /**
+     * 検索期間を取得する
+     * @param String 画面の種類
+     * @return String 検索期間
+     */
+    private function getSearchDate(string $mode = null): string
+    {
+        //検索期間を初期化する
+        $searchDate = '';
+
+        //現在の日時を取得する
+        $now = Carbon::now();
+
+        //1.画面の種類が「yearly」の場合は「当年/1/1 00:00:00」を取得する
+        //2.画面の種類が「monthly」の場合は「当年/当月/1 00:00:00」を取得する
+        //3.画面の種類が「weekly」の場合は「当年/当月/1(日) 00:00:00」を取得する
+        //4.画面の種類が「daily」の場合は「当年/当月/当日 00:00:00」を取得する
+        if ($mode == 'yearly') {
+            $searchDate = $now->format('Y/1/1 00:00:00');
+        } else if ($mode == 'monthly') {
+            $searchDate = $now->format('Y/m/1 00:00:00');
+        } else if ($mode == 'weekly') {
+            $day = $now->subDay($now->dayOfWeek);
+            $searchDate = $now->format("Y/m/{$day} 00:00:00");
+        } else if ($mode == 'daily') {
+            $searchDate = $now->format('Y/m/d 00:00:00');
+        }
+        return $searchDate;
     }
 }
