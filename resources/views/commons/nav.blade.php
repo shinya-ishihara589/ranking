@@ -37,7 +37,7 @@
             </a>
         </li>
         <li>
-            <a href="/profile/{{ $commons['users']['id'] }}" class="nav-link">
+            <a href="/profile/{{ $commons['user_id'] }}" class="nav-link">
                 <i class="nav-icon bi-person"></i>
                 プロフィール
             </a>

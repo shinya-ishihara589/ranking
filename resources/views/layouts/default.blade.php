@@ -23,6 +23,9 @@
     @yield('modals.apply-send')
     @yield('modals.comment-send')
     @yield('modals.update-profile')
+    @yield('modals.user-register')
+    @yield('modals.issue-onetime-password')
+    @yield('modals.overlay')
     @yield('commons.foot')
 </body>
 

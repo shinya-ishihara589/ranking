@@ -13,17 +13,17 @@ class ProfileController extends Controller
 {
     /**
      * プロフィール画面に遷移する
-     * @param Integer ユーザーID
+     * @param String ユーザーID
      * @return Object プロフィール情報
      */
-    public function index(int $userId): object
+    public function index(string $userId): object
     {
         //ユーザーを取得する
-        $userData = User::with(['profile'])->find($userId);
+        $userData = User::with(['profile'])->where('user_id', $userId)->first();
 
         //プロフィール情報を取得する
         $profileModel = new Profile;
-        $profileData = $profileModel->getProfileData($userId);
+        $profileData = $profileModel->getProfileData($userData->id);
 
         return view('profile.index', compact(['userData', 'profileData']));
     }
@@ -66,16 +66,19 @@ class ProfileController extends Controller
     }
 
     /**
-     * ホームの追加情報を取得する
-     * @param Object ホーム取得情報
-     * @param String 画面の種類
-     * @return Array ホームの追加情報
+     * プロフィールの追加情報を取得する
+     * @param Object プロフィール取得情報
+     * @param String ユーザーID
+     * @return Array プロフィールの追加情報
      */
-    public function get(Request $request, $userId): array
+    public function get(Request $request, string $userId): array
     {
+        //ユーザーを取得する
+        $userData = User::with(['profile'])->where('user_id', $userId)->first();
+
         //プロフィールの追加情報を取得する
         $profileModel = new Profile;
-        $profileData = $profileModel->getProfileData($userId, $request->offset);
+        $profileData = $profileModel->getProfileData($userData->id, $request->offset);
 
         return compact(['profileData']);
     }

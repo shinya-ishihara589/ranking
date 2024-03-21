@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//ログイン
+Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'index']);
+Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+
 //ログアウト
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
 
-Auth::routes(['register' => false, 'reset' => false, 'verify' => false]);
+//以下ログインユーザーのみ実行可能
+Auth::routes();
 
 //ホーム
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
-Route::post('/get', [App\Http\Controllers\HomeController::class, 'get']);
+Route::post('/', [App\Http\Controllers\HomeController::class, 'get']);
 
 //ランキング
 Route::get('/ranking/{itemId?}', [App\Http\Controllers\RankingController::class, 'index'])->name('ranking.index');

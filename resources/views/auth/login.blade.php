@@ -1,25 +1,42 @@
 <!-- レイアウトの呼び出し -->
 @extends('layouts.default')
 
-<!-- へッドの呼び出し -->
+<!-- ヘッドの呼び出し -->
 @include('commons.head')
 
-<div class="container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); display: flex;  align-items: center; justify-content: center;">
-    <div class="card card-container d-flex col-lg-6 p-3">
-        {!! Form::open(['method' => 'POST', 'route' => 'login', 'class' => 'form-signin']) !!}
-        <span id="reauth-email" class="reauth-email"></span>
-        {!! Form::email('email', '', ['class' => 'rounded-pill col-lg-2 mb-3 form-control' . ( $errors->has('email') ? ' is-invalid' : '' ), 'placeholder' => 'メールアドレス', 'required', 'autofocus']) !!}
-        {!! Form::password('password', ['class' => 'rounded-pill col-lg-2 mb-3 form-control' . ( $errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'パスワード', 'required']) !!}
-        {!! Form::submit('ログイン', ['class'=>'btn btn-outline-primary rounded-pill col-lg-4']) !!}
-        {!! Form::close() !!}
-        <button href="#" class="btn btn-outline-danger rounded-pill col-lg-6 mb-3">
-            パスワードを忘れた方
-        </button>
-        <button href="#" class="btn btn-outline-success rounded-pill col-lg-6">
-            アカウント登録
-        </button>
+<!-- コンテンツの呼び出し -->
+@section('contents')
+
+<div class="container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); display: flex; justify-content: center;">
+    <div class="card card-container d-flex col-lg-5 p-3">
+        <div class="mb-3">
+            <img src="{{ asset('storage/developer/login_logo.jpg') }}" alt="Logo" width="100%" height="300px" class="d-inline-block align-text-top">
+        </div>
+        <div class="mb-3">
+            {!! Form::open(['method' => 'POST', 'route' => 'login', 'class' => 'form-signin']) !!}
+            <span id="reauth-email" class="reauth-email"></span>
+            {!! Form::email('email', '', ['class' => 'rounded-pill col-lg-2 mb-3 form-control' . ( $errors->has('email') ? ' is-invalid' : '' ), 'placeholder' => 'メールアドレス', 'required', 'autofocus']) !!}
+            {!! Form::password('password', ['class' => 'rounded-pill col-lg-2 mb-3 form-control' . ( $errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'パスワード', 'required']) !!}
+            {!! Form::submit('ログイン', ['class'=>'btn btn-outline-primary rounded-pill col-lg-4']) !!}
+            {!! Form::close() !!}
+        </div>
+        <div>
+            <button class="btn btn-outline-danger rounded-pill col-lg-4" onClick="onOverlay()">
+                パスワードを忘れた方
+            </button>
+            <button class="btn btn-outline-success rounded-pill col-lg-4" data-bs-target="#issue-onetime-password-modal" data-bs-toggle="modal">
+                アカウント登録
+            </button>
+        </div>
     </div>
 </div>
+@endsection
 
-<!--フットの呼び出し-->
+<!-- アカウント登録のモーダル画面の呼び出し -->
+@include('modals.user-register')
+
+<!-- アカウント登録のモーダル画面の呼び出し -->
+@include('modals.issue-onetime-password')
+
+<!-- フットの呼び出し -->
 @include('commons.foot')

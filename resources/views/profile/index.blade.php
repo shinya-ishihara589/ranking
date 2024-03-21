@@ -21,9 +21,11 @@
 	<div id="profile-name">
 		{{ isset($userData->profile->name) ? $userData->profile->name : $userData->user_id }}
 	</div>
+	@if ($commons['user_id'] == $userData->user_id)
 	<div>
 		<button type="button" class="btn btn-outline-warning btn-sm rounded-pill" data-bs-target="#update-profile-modal" data-bs-toggle="modal">プロフィール変更</button>
 	</div>
+	@endif
 	<div id="profile-self-introduction">
 		{!! nl2br(e($userData->profile->self_introduction)) !!}
 	</div>
@@ -78,7 +80,9 @@
 @endsection
 
 <!-- プロフィール変更のモーダル画面の呼び出し -->
+@if ($commons['user_id'] == $userData->user_id)
 @include('modals.update-profile')
+@endif
 
 <!-- フットの呼び出し -->
 @include('commons.foot')

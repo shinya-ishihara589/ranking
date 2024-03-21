@@ -21,7 +21,7 @@
             <th scope="col" class="col-md-1 text-center">
                 <button type="button" class="btn btn-outline-warning btn-sm rounded-pill" data-bs-target="#apply-send-modal" data-bs-toggle="modal">申請</button>
             </th>
-            <th scope="col" class="col-md-4 text-primary">{{ $itemData->name }}</th>
+            <th scope="col" class="col-md-4 text-primary" id="item-id-{{ $itemData->id }}">{{ $itemData->name }}</th>
             <th scope="col" class="col-md-1 text-center text-primary" id="ranking-head-table-vote">{{ $itemData->votes_count }}</th>
             <th scope="col" class="col-md-1 text-center text-primary">
                 <button type="button" class="btn btn-outline-success btn-sm rounded-pill" onClick="clickButtonVote({{ $itemData->id }})">投票</button>
@@ -48,7 +48,7 @@
         <tr>
             <th scope="row" class="text-center">{{ $no + 1 }}</th>
             <td>
-                <a href="/ranking{{ isset($ranking->id) ? '/' . $ranking->id : '' }}">{{ $ranking->name }}</a>
+                <a href="/ranking{{ isset($ranking->id) ? '/' . $ranking->id : '' }}" id="item-id-{{ $ranking->id }}">{{ $ranking->name }}</a>
             </td>
             <td class="text-center">{{ isset($ranking->votes_count) ? $ranking->votes_count : 0 }}</td>
             <td class="text-center">

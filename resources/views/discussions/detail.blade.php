@@ -15,7 +15,7 @@
 
 <!-- 議論一覧 -->
 <table class="table align-middle">
-    <thead class="fs-6 fw-bold">
+    <thead class="fs-5 fw-bold">
         <tr>
             <th scope="col" class="col-md-1 text-center">項目</th>
             <th scope="col" class="col-md-4 text-left">テキスト</th>

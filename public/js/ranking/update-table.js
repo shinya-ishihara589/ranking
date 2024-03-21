@@ -121,6 +121,9 @@ function clickChangeButtonRanking(mode) {
  * テーブルを追加する
  */
 function clickAcquisitionButtonRanking() {
+    //オーバーレイをONにする
+    onOverlay();
+
     //検索情報を取得する
     let words = $('#ranking-words').val();
 
@@ -134,7 +137,7 @@ function clickAcquisitionButtonRanking() {
     let url = `/ranking/${itemId}`;
 
     //取得開始数を取得する
-    let offset = $("#ranking-body-table").children().length + 1;
+    let offset = $("#ranking-body-table").children().length;
 
     //項目登録を実行する
     $.ajax({
@@ -153,10 +156,25 @@ function clickAcquisitionButtonRanking() {
         updateTable(data);
     }).fail(function (error) {
         console.log(error);
+    }).always(function () {
+        //オーバーレイをOFFにする
+        offOverlay();
     });
 }
 
+/**
+ * 投票を行う
+ * @param {Integer} voteId
+ */
 function clickButtonVote(voteId) {
+    //項目名を取得する
+    let itemName = $(`#item-id-${voteId}`).text();
+
+    //投票の確認を行う
+    if (!window.confirm(`「${itemName}」に投票します。`)) {
+        return false;
+    }
+
     //検索情報を取得する
     let words = $('#ranking-words').val();
 
@@ -200,6 +218,9 @@ function clickButtonVote(voteId) {
  * 項目を追加する
  */
 function clickAddItemButtonRanking() {
+    //オーバーレイをONにする
+    onOverlay();
+
     //検索情報を取得する
     let words = $('#ranking-words').val();
 
@@ -243,6 +264,9 @@ function clickAddItemButtonRanking() {
 
         //入力欄のエラーメッセージを表示する
         showErrorMeaage(error);
+    }).always(function () {
+        //オーバーレイをOFFにする
+        offOverlay();
     });
 }
 
@@ -275,7 +299,7 @@ function updateTable(data) {
         //テーブルボディを追加する
         tableBody += `<tr>`;
         tableBody += `<th class="text-center">${row++}</th>`;
-        tableBody += `<td><a href="/ranking${link}">${data.rankingData[i].name}</a></td>`;
+        tableBody += `<td><a href="/ranking${link}" id="item-id-${data.rankingData[i].id}">${data.rankingData[i].name}</a></td>`;
         tableBody += `<td class="text-center">${voteCount}</td>`;
         tableBody += `<td class="text-center">`;
         tableBody += `<button type="button" class="btn btn-outline-success btn-sm rounded-pill" onClick="clickButtonVote(${data.rankingData[i].id})">投票</button>`;

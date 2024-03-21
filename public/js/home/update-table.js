@@ -9,7 +9,7 @@ function clickSearchButtonHome() {
     let mode = $('#home-mode').val();
 
     //URLを取得する
-    let url = '/get';
+    let url = '/';
 
     //項目登録を実行する
     $.ajax({
@@ -44,7 +44,7 @@ function clickResetButtonHome() {
     let mode = $('#home-mode').val();
 
     //URLを取得する
-    let url = '/get';
+    let url = '/';
 
     //項目登録を実行する
     $.ajax({
@@ -80,7 +80,7 @@ function clickChangeButtonHome(mode) {
     $('#home-mode').val(mode);
 
     //URLを取得する
-    let url = '/get';
+    let url = '/';
 
     //項目登録を実行する
     $.ajax({
@@ -118,7 +118,7 @@ function clickAcquisitionButtonHome() {
     let offset = $("#home-body-table").children().length + 1;
 
     //URLを取得する
-    let url = '/get';
+    let url = '/';
 
     //項目登録を実行する
     $.ajax({

@@ -2,6 +2,9 @@
  * テーブルを追加する
  */
 function clickAcquisitionButtonProfile() {
+    //オーバーレイをONにする
+    onOverlay();
+
     //取得開始数を取得する
     let offset = $("#profile-body-table").children().length;
 
@@ -28,6 +31,9 @@ function clickAcquisitionButtonProfile() {
         updateTable(data);
     }).fail(function (error) {
         console.log(error);
+    }).always(function () {
+        //オーバーレイをOFFにする
+        offOverlay();
     });
 }
 

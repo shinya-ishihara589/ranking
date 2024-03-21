@@ -26,7 +26,7 @@ class ItemFormRequest extends FormRequest
             'name' => [
                 'required',
                 'max:50',
-                Rule::unique('items')->where('item_id', $this->item_id)->where('name', $this->name),
+                Rule::unique('items')->where('item_id', $this->itemId)->where('name', $this->name),
             ],
         ];
     }

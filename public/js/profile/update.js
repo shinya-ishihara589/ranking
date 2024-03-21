@@ -1,4 +1,7 @@
 function clickButtonUpdateProfile() {
+    //オーバーレイをONにする
+    onOverlay();
+
     //フォーム情報を取得する
     let formData = new FormData($('#update-profile-modal-form').get()[0]);
 
@@ -31,5 +34,8 @@ function clickButtonUpdateProfile() {
 
         //入力欄のエラーメッセージを表示する
         showErrorMeaage(error);
+    }).always(function () {
+        //オーバーレイをOFFにする
+        offOverlay();
     });
 }
