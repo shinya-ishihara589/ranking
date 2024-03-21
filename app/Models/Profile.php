@@ -12,18 +12,20 @@ class Profile extends Model
 
     public $timestamps = false; //自動タイムスタンプをオフにする
 
+    private $userId;
     private $offset;
 
     /**
-     * ホーム情報を取得する
-     * @return Database ホーム情報
+     * プロフィール情報を取得する
+     * @return Database プロフィール情報
      */
-    public function getProfileData(int $userId, int $offset): array
+    public function getProfileData(int $userId, int $offset = 0): array
     {
+        //メンバ変数に値を入れる
         $this->userId = $userId;
         $this->offset = $offset;
 
-        //ホームで使用する情報のSQLを生成する
+        //プロフィールで使用する情報のSQLを生成する
         $sql = "SELECT * FROM ( ";
         $sql .= $this->getSqlVotesTable() . "UNION";
         $sql .= $this->getSqlCommentsTable() . "UNION";
@@ -33,8 +35,8 @@ class Profile extends Model
     }
 
     /**
-     * ホーム情報(投票)のSQLを取得する
-     * @return String ホーム情報(投票)のSQL
+     * プロフィール情報(投票)のSQLを取得する
+     * @return String プロフィール情報(投票)のSQL
      */
     private function getSqlVotesTable(): string
     {
@@ -64,8 +66,8 @@ class Profile extends Model
     }
 
     /**
-     * ホーム情報(コメント)のSQLを取得する
-     * @return String ホーム情報(コメント)のSQL
+     * プロフィール情報(コメント)のSQLを取得する
+     * @return String プロフィール情報(コメント)のSQL
      */
     private function getSqlCommentsTable(): string
     {
@@ -89,8 +91,8 @@ class Profile extends Model
     }
 
     /**
-     * ホーム情報(議論)のSQLを取得する
-     * @return String ホーム情報(議論)のSQL
+     * プロフィール情報(議論)のSQLを取得する
+     * @return String プロフィール情報(議論)のSQL
      */
     private function getSqlDiscussionsTable(): string
     {

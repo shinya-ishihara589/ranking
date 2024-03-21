@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use Illuminate\Http\Request;
+use App\Http\Requests\CommentFormRequest;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
@@ -12,7 +12,7 @@ class CommentController extends Controller
      * コメント情報を追加する
      * @param Request コメント情報
      */
-    public function send(Request $request, $parent_id = null)
+    public function send(CommentFormRequest $request, $parent_id = null)
     {
         //ユーザーIDの取得する
         $userId = Auth::id();

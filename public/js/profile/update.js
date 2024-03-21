@@ -23,11 +23,13 @@ function clickButtonUpdateProfile() {
         $('#profile-name').text(data.profileData.name);
         $('#profile-self-introduction').html(selfIntroduction);
 
-        //画像情報を変更する
-        // $('.profile-icon').children('img').attr('src', 'http://127.0.0.1:8000/storage/users/seeder/banner.jpg');
-        // $('.profile-banner').children('img').attr('src', 'http://127.0.0.1:8000/storage/users/seeder/icon.jpg');
+        //モーダル画面を表示にする
+        $('#update-profile-modal').modal('hide');
     }).fail(function (error) {
-        console.log(error);
+        //入力欄のエラーメッセージを非表示にする
+        hideErrorMeaage();
+
+        //入力欄のエラーメッセージを表示する
+        showErrorMeaage(error);
     });
-    $('#update-profile-modal').modal('hide');
 }

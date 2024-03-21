@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\Ranking;
-use Illuminate\Http\Request;
+use App\Http\Requests\ItemFormRequest;
 use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
@@ -15,7 +15,7 @@ class ItemController extends Controller
      * @param Integer 項目ID
      * @return Array ランキング情報
      */
-    public function store(Request $request, int $itemId = null): array
+    public function store(ItemFormRequest $request, int $itemId = null): array
     {
         //ユーザーIDの取得する
         $userId = Auth::id();

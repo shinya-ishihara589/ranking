@@ -9,16 +9,17 @@
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    {!! Form::select('modal_apply_type', $applyTypes, '', ['id' => 'modal-apply-type', 'class' => 'form-select' . ($errors->has('modal_apply_type') ? ' is-invalid' : '')]) !!}
-                    {!! $errors->first('modal_apply_type', '<span class="invalid-feedback" role="alert"><strong>:message</strong></span>') !!}
+                    {!! Form::select('type', $applyTypes, '', ['id' => 'type', 'class' => 'form-control input-field']) !!}
+                    <span class="invalid-feedback" id='type_error' role="alert"></span>
                 </div>
                 <div>
-                    {!! Form::textarea('modal_apply_text', '', ['id' => 'modal-apply-text', 'class' => 'form-control' . ($errors->has('modal_apply_text') ? ' is-invalid' : '')]) !!}
-                    {!! $errors->first('modal_apply_text', '<span class="invalid-feedback" role="alert"><strong>:message</strong></span>') !!}
+                    {!! Form::textarea('text', '', ['id' => 'text', 'class' => 'form-control input-field', 'placeholder' => '申請内容&#10;例：完壁は誤りのため、完璧に修正してください。']) !!}
+                    <span class="invalid-feedback" id='text_error' role="alert"></span>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-sm" onClick="clickButtonApplySend({{ $itemData->id }})">送信</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill" data-bs-dismiss="modal">閉じる</button>
+                <button type="button" class="btn btn-outline-primary btn-sm rounded-pill" onClick="clickButtonApplySend({{ $itemData->id }})">送信</button>
             </div>
         </div>
     </div>

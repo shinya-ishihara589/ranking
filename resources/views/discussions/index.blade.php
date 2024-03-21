@@ -52,6 +52,9 @@
 @include('commons.aside')
 @endsection
 
+<!--フットの呼び出し-->
+@include('commons.foot')
+
 <script>
     function getDiscussionDetail(discussionId) {
         window.location.href = `/discussions/${discussionId}`;

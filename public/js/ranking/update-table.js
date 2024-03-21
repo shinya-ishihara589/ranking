@@ -207,7 +207,7 @@ function clickAddItemButtonRanking() {
     let mode = $('#ranking-mode').val();
 
     //項目名を取得する
-    let name = $('#modal-item-name').val();
+    let name = $('#name').val();
 
     //項目IDを取得する
     let itemId = $('#ranking-item-id').val();
@@ -228,16 +228,22 @@ function clickAddItemButtonRanking() {
             'name': name,
             'limit': 0
         }
-    }).done(function (data,) {
+    }).done(function (data) {
         //テーブルの行を全て削除する
         $('#ranking-body-table').empty();
 
         //テーブルを生成する
         updateTable(data);
+
+        //モーダル画面を非表示にする
+        $('#add-item-modal').modal('hide');
     }).fail(function (error) {
-        console.log(error);
+        //入力欄のエラーメッセージを非表示にする
+        hideErrorMeaage();
+
+        //入力欄のエラーメッセージを表示する
+        showErrorMeaage(error);
     });
-    $('#add-item-modal').modal('hide');
 }
 
 /**

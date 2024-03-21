@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProfileFormRequest;
 
 class ProfileController extends Controller
 {
@@ -22,7 +23,7 @@ class ProfileController extends Controller
 
         //プロフィール情報を取得する
         $profileModel = new Profile;
-        $profileData = $profileModel->getProfileData($userId, 0);
+        $profileData = $profileModel->getProfileData($userId);
 
         return view('profile.index', compact(['userData', 'profileData']));
     }
@@ -32,7 +33,7 @@ class ProfileController extends Controller
      * @param Object プロフィール情報
      * @return Array プロフィール情報
      */
-    public function update(Request $request): array
+    public function update(ProfileFormRequest $request): array
     {
         //ファイル情報を取得する
         $bannerFile = $request->file('banner_file');
@@ -70,11 +71,11 @@ class ProfileController extends Controller
      * @param String 画面の種類
      * @return Array ホームの追加情報
      */
-    public function acquisition(Request $request, $userId): array
+    public function get(Request $request, $userId): array
     {
         //プロフィールの追加情報を取得する
         $profileModel = new Profile;
-        $profileData = $profileModel->getProfileData($request->offset);
+        $profileData = $profileModel->getProfileData($userId, $request->offset);
 
         return compact(['profileData']);
     }

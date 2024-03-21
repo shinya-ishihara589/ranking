@@ -35,7 +35,7 @@ Route::post('/search', [App\Http\Controllers\SearchController::class, 'get']);
 
 //通知
 Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');
-Route::post('/notifications/{id}', [App\Http\Controllers\NotificationController::class, 'store']);
+Route::post('/notifications', [App\Http\Controllers\NotificationController::class, 'get']);
 
 //議論
 Route::get('/discussions', [App\Http\Controllers\DiscussionController::class, 'index'])->name('discussions.index');
@@ -43,12 +43,13 @@ Route::get('/discussions/{discussionId}', [App\Http\Controllers\DiscussionContro
 
 //プロフィール
 Route::get('/profile/{userId}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
+Route::post('/profile/{userId}', [App\Http\Controllers\ProfileController::class, 'get']);
 Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'update']);
 Route::get('/friends/{userId}', [App\Http\Controllers\FriendController::class, 'index']);
 
 //設定
-Route::get('/setting', [App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
-Route::post('/setting', [App\Http\Controllers\SettingController::class, 'update']);
+// Route::get('/setting', [App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
+// Route::post('/setting', [App\Http\Controllers\SettingController::class, 'update']);
 
 //コメント
 Route::post('/comments/send/{parent_id?}', [App\Http\Controllers\CommentController::class, 'send']);

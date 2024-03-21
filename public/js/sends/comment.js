@@ -1,6 +1,6 @@
 function clickButtonCommentSend() {
     //コメントを取得する
-    let comment = $('#modal-comment').val();
+    let comment = $('#comment').val();
 
     //URLを取得する
     let url = `/comments/send`;
@@ -16,8 +16,13 @@ function clickButtonCommentSend() {
             'comment': comment
         }
     }).done(function () {
+        //モーダル画面を非表示にする
+        $('#comment-send-modal').modal('hide');
     }).fail(function (error) {
-        console.log(error);
+        //入力欄のエラーメッセージを非表示にする
+        hideErrorMeaage();
+
+        //入力欄のエラーメッセージを表示する
+        showErrorMeaage(error);
     });
-    $('#comment-send-modal').modal('hide');
 }

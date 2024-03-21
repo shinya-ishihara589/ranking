@@ -13,7 +13,7 @@
 <!-- ランキング -->
 <header>
 	<div class="profile-banner">
-		<img src="{{ asset('storage/users/' . $userData->user_id . '/' . $userData->profile->banner_path) }}" width="100%" height="200px" style="object-fit: cover">
+		<img src="{{ asset('storage/users/' . $userData->user_id . '/' . $userData->profile->banner_path) }}" width="100%" height="100px" style="object-fit: cover">
 	</div>
 	<div class="profile-icon">
 		<img src="{{ asset('storage/users/' . $userData->user_id . '/' . $userData->profile->icon_path) }}" class="rounded-circle" width="64px" height="64px">
@@ -29,14 +29,14 @@
 	</div>
 </header>
 <table class="table align-middle">
-	<thead class="fs-6 fw-bold">
+	<thead class="fs-5 fw-bold">
 		<tr>
 			<th scope="col" class="col-md-1 text-center">順位</th>
 			<th scope="col" class="col-md-4">名前</th>
 			<th scope="col" class="col-md-1 text-center"></th>
 		</tr>
 	</thead>
-	<tbody class="fs-6" id="ranking-body-table-child">
+	<tbody class="fs-6" id="profile-body-table">
 		@foreach ($profileData as $profile)
 		<tr>
 			<th class="text-center">
@@ -64,7 +64,7 @@
 	</tbody>
 	<tfoot class="fs-6">
 		<tr>
-			<td colspan="4" id="home-foot-table" class="text-center text-primary" onClick="getUpdateData('')">
+			<td colspan="4" class="text-center text-primary" onClick="clickAcquisitionButtonProfile('')">
 				<i class="nav-icon bi-arrow-clockwise"></i>
 				取得する
 				<i class="nav-icon bi-arrow-counterclockwise"></i>
@@ -83,4 +83,5 @@
 <!-- フットの呼び出し -->
 @include('commons.foot')
 
-<script src="/js/updates/profile.js"></script>
+<script src="/js/profile/update.js"></script>
+<script src="/js/profile/update-table.js"></script>

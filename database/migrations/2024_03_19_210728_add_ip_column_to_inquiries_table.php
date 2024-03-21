@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('inquiries', function (Blueprint $table) {
-            $table->string('ip', 255)->after('datetime');
+            $table->dropColumn('ip');
         });
     }
 };
