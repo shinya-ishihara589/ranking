@@ -24,7 +24,7 @@
             <button class="btn btn-outline-danger rounded-pill col-lg-4" onClick="onOverlay()">
                 パスワードを忘れた方
             </button>
-            <button class="btn btn-outline-success rounded-pill col-lg-4" data-bs-target="#issue-onetime-password-modal" data-bs-toggle="modal">
+            <button class="btn btn-outline-success rounded-pill col-lg-4" data-bs-target="#tmp-register-modal" data-bs-toggle="modal">
                 アカウント登録
             </button>
         </div>
@@ -33,12 +33,13 @@
 @endsection
 
 <!-- アカウント登録のモーダル画面の呼び出し -->
-@include('modals.user-register')
+@include('modals.register')
 
-<!-- アカウント登録のモーダル画面の呼び出し -->
-@include('modals.issue-onetime-password')
+<!-- ワンタイムパスワード発行のモーダル画面の呼び出し -->
+@include('modals.tmp-register')
 
 <!-- フットの呼び出し -->
 @include('commons.foot')
 
-<script src="/js/auth/issue-onetime-password.js"></script>
+<script src="/js/auth/register.js"></script>
+<script src="/js/auth/tmp-register.js"></script>

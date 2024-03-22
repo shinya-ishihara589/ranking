@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('onetimes', function (Blueprint $table) {
+        Schema::create('tmp_users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('tmp_user_id', 255);
+            $table->string('tmp_email', 255);
             $table->string('onetime_password', 255);
             $table->timestamp('datetime');
             $table->string('ip', 255);
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('onetimes');
+        Schema::dropIfExists('tmp_users');
     }
 };
