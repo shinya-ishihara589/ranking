@@ -41,15 +41,6 @@ class LoginController extends Controller
     }
 
     /**
-     * ログイン画面を表示する
-     * @return Object ログイン画面
-     */
-    public function index(): object
-    {
-        return view('auth.login.index');
-    }
-
-    /**
      * ログイン処理を行う
      * @param Object ログイン情報
      * @return Object ホーム画面 又は ログイン画面

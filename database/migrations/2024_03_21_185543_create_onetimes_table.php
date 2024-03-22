@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('onetimes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('email', 255)->nullable();
             $table->string('onetime_password', 255);
             $table->timestamp('datetime');
+            $table->string('ip', 255);
         });
     }
 

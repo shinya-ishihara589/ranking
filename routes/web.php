@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +19,12 @@ Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'
 
 //ログアウト
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
+
+// //ユーザー登録
+// Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
+
+//ワンタイムパスワード発行
+Route::post('/issue_onetime_password', [App\Http\Controllers\Auth\RegisterController::class, 'issueOnetimePassword']);
 
 //以下ログインユーザーのみ実行可能
 Auth::routes();

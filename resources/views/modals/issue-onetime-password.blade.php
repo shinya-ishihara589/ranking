@@ -14,7 +14,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill" data-bs-dismiss="modal">閉じる</button>
-                <button type="button" class="btn btn-outline-primary btn-sm rounded-pill" onClick="">発行</button>
+                <button type="button" class="btn btn-outline-primary btn-sm rounded-pill" onClick="clickButtonIssueOnetimePassword()">発行</button>
             </div>
         </div>
     </div>

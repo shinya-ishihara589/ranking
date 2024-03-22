@@ -40,3 +40,5 @@
 
 <!-- フットの呼び出し -->
 @include('commons.foot')
+
+<script src="/js/auth/issue-onetime-password.js"></script>

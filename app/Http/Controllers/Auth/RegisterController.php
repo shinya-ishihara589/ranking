@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use App\Mail\SendOnetimePasswordMail;
+use App\Models\Onetime;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -64,10 +68,34 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //ユーザー情報を登録する
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    /**
+     * ワンタイムパスワードを送信する
+     * @param String メールアドレス
+     */
+    public function issueOnetimePassword(Request $request)
+    {
+        //メールアドレスを取得する
+        $email = $request->email;
+
+        //ワンタイムパスワードを発行する
+        $onetimePassword = $this->getPassword(15);
+
+        //ワンタイム情報を登録する
+        $onetime = Onetime::firstOrNew(['email' => $email]);
+        $onetime->email = $email;
+        $onetime->onetime_password = $onetimePassword;
+        $onetime->ip = $request->ip();
+        $onetime->save();
+
+        //メールを送信する
+        Mail::to($email)->send(new SendOnetimePasswordMail($onetimePassword));
     }
 }
