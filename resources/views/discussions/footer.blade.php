@@ -1,4 +1,4 @@
-@section('commons.footer')
+@section('footer')
 <footer class="text-left mt-3 mb-3 sticky-bottom bg-white">
     {!! Form::open(['url' => ['/', $mode != 'all' ? $mode : ''], 'method' => 'get', 'class' => 'd-flex']) !!}
     {!! Form::text('words', $request->words, ['class' => 'form-control me-1 rounded-pill', 'id' => 'home-words', 'placeholder' => '検索ワード']) !!}

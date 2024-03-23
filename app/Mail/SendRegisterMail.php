@@ -29,6 +29,6 @@ class SendRegisterMail extends Mailable
      */
     public function build(): object
     {
-        return  $this->subject('ワンタイムパスワードの発行')->view('emails.issue-onetime-password');
+        return  $this->subject('アカウント登録が完了しました')->view('emails.tmp-register');
     }
 }

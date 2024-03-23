@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Mail\SendOnetimePasswordMail;
+use App\Mail\SendTmpRegisterMail;
 use App\Models\TmpUser;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -12,8 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
-class RegisterController extends Controller
+class RegisterController extends AuthController
 {
     /*
     |--------------------------------------------------------------------------
@@ -56,82 +56,73 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required'],
         ]);
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        //ユーザー情報を登録する
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
-
-    /**
-     * ユーザー仮登録を行う
-     * @param Object ユーザー仮登録情報
-     */
-    public function tmpRegister(Request $request): void
-    {
-        //メールアドレスを取得する
-        $tmpUserId = $request->tmp_user_id;
-
-        //メールアドレスを取得する
-        $tmpEmail = $request->tmp_email;
-
-        //ワンタイムパスワードを発行する
-        $onetimePassword = $this->getPassword(15);
-
-        //ワンタイム情報を登録する
-        $onetime = TmpUser::firstOrNew(['tmp_email' => $tmpEmail]);
-        $onetime->tmp_user_id = $tmpUserId;
-        $onetime->tmp_email = $tmpEmail;
-        $onetime->onetime_password = $onetimePassword;
-        $onetime->ip = $request->ip();
-        $onetime->save();
-
-        //メールを送信する
-        Mail::to($tmpEmail)->send(new SendOnetimePasswordMail($onetimePassword));
     }
 
     /**
      * アカウント情報を登録する
-     * @param Object 登録情報
+     * @param Array 登録情報
      */
-    public function register(Request $request): void
+    protected function create(array $data)
     {
+
         //ユーザーIDを取得する
-        $userId = $request->user_id;
+        $userId = $data['user_id'];
 
         //メールアドレスを取得する
-        $email = $request->email;
+        $email = $data['email'];
 
         //ワンタイムパスワードを取得する
-        $onetimePassword = $request->email;
+        $onetimePassword = $data['password'];
 
-        // $tmpUser = TmpUser::where('tmp_user_id', $userId)->where('tmp_email', $email)->where('onetime_password', $onetimePassword);
+        $tmpUser = TmpUser::where('user_id', $userId)->where('email', $email)->where('password', $onetimePassword);
 
         //パスワードを発行する
         $password = $this->getPassword(25);
 
         //アカウント情報を登録する
-        $tmpUser = new User;
-        $tmpUser->user_id = $userId;
-        $tmpUser->email = $email;
-        $tmpUser->password = bcrypt($password);
-        $tmpUser->created_user = 1;
-        $tmpUser->save();
+        return User::create([
+            'user_id' => $userId,
+            'email' => $email,
+            'password' => Hash::make($password),
+            'created_user' => 1,
+        ]);
 
         //メールを送信する
-        Mail::to($email)->send(new SendOnetimePasswordMail($password));
+        Mail::to($email)->send(new SendTmpRegisterMail($password));
+    }
+
+    /**
+     * 仮ユーザー登録を行う
+     * @param Object 仮ユーザー登録情報
+     */
+    public function tmpRegister(Request $request): void
+    {
+        //バリデーションチェックを行う
+        $request->validate([
+            'user_id' => $this->getUserIdValidate($request),
+            'email' => $this->getMailValidate($request),
+        ]);
+
+        //メールアドレスを取得する
+        $userId = $request->user_id;
+
+        //メールアドレスを取得する
+        $email = $request->email;
+
+        //パスワードを発行する
+        $password = $this->getPassword(15);
+
+        //仮ユーザー情報を登録する
+        $onetime = TmpUser::firstOrNew(['email' => $email]);
+        $onetime->user_id = $userId;
+        $onetime->email = $email;
+        $onetime->password = $password;
+        $onetime->ip = $request->ip();
+        $onetime->save();
+
+        //メールを送信する
+        Mail::to($email)->send(new SendTmpRegisterMail($password));
     }
 }

@@ -1,12 +1,12 @@
 /**
  * エラーメッセージを表示する
  */
-function showErrorMeaage(error) {
+function showErrorMeaage(error, funcName) {
     //エラーメッセージを表示する
     for (var key in error.responseJSON.errors) {
         var message = `<strong class="error-message">${error.responseJSON.errors[key][0]}</strong>`;
-        $(`#${key}_error`).append(message)
-        $(`#${key}`).addClass('is-invalid');
+        $(`#${funcName}${key}_error`).append(message)
+        $(`#${funcName}${key}`).addClass('is-invalid');
     }
 }
 

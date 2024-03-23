@@ -1,4 +1,4 @@
-@section('commons.footer')
+@section('footer')
 <footer class="text-left pb-3 sticky-bottom bg-white">
     <div role="group">
         <button class="btn btn-primary col-lg-2 rounded-pill change-button" id="button-all">

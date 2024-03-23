@@ -3,7 +3,7 @@ function clickButtonUpdateProfile() {
     onOverlay();
 
     //フォーム情報を取得する
-    let formData = new FormData($('#update-profile-modal-form').get()[0]);
+    let formData = new FormData($('#edit-profile-modal-form').get()[0]);
 
     //URLを取得する
     let url = `/profile`;
@@ -27,7 +27,7 @@ function clickButtonUpdateProfile() {
         $('#profile-self-introduction').html(selfIntroduction);
 
         //モーダル画面を表示にする
-        $('#update-profile-modal').modal('hide');
+        $('#edit-profile-modal').modal('hide');
     }).fail(function (error) {
         //入力欄のエラーメッセージを非表示にする
         hideErrorMeaage();

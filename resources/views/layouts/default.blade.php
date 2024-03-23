@@ -10,19 +10,19 @@
         <div style="width: 20%;">
             @yield('commons.nav')
         </div>
-        <div style="width: 80%;">
-            @yield('commons.header')
+        <div style="width: 60%;">
+            @yield('header')
             @yield('contents')
-            @yield('commons.footer')
+            @yield('footer')
         </div>
-        <!-- <div style="width: 20%;">
-                @yield('commons.aside')
-            </div> -->
+        <div style="width: 20%;">
+            @yield('commons.aside')
+        </div>
     </div>
     @yield('modals.add-item')
-    @yield('modals.apply-send')
-    @yield('modals.comment-send')
-    @yield('modals.update-profile')
+    @yield('modals.send-apply')
+    @yield('modals.send-comment')
+    @yield('modals.edit-profile')
     @yield('modals.register')
     @yield('modals.tmp-register')
     @yield('modals.overlay')

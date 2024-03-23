@@ -141,9 +141,17 @@ return [
       |
      */
     'attributes' => [
+        'user_id' => 'ユーザーID',
+        'email' => 'メールアドレス',
+        'password' => 'パスワード',
+
         'name' => '名前',
-        'text' => '申請内容',
-        'comment' => 'コメント',
         'self_introduction' => '自己紹介',
+        'banner' => 'バナー',
+        'icon' => 'アイコン',
+
+        'item' => '項目',
+
+        'comment' => 'コメント',
     ],
 ];

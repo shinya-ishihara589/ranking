@@ -3,7 +3,7 @@
  */
 function onOverlay() {
     //画面をクリックできなくする
-    $('html').css('pointer-events', 'none');
+    $('div').css('pointer-events', 'none');
 
     //ロードアイコンを表示する
     $('#orverlay').removeClass('d-none');
@@ -14,8 +14,8 @@ function onOverlay() {
  */
 function offOverlay() {
     //画面をクリックできるようにする
-    $('html').css('pointer-events', 'auto');
+    $('div').css('pointer-events', 'auto');
 
-    //ロードアイコンを表示する
+    //ロードアイコンを非表示にする
     $('#orverlay').addClass('d-none');
 }

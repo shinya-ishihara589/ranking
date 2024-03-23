@@ -42,14 +42,14 @@
                 プロフィール
             </a>
         </li>
-        <!-- <li>
+        <li>
             <a href="/setting" class="nav-link">
                 <i class="nav-icon bi-gear"></i>
                 設定
             </a>
-        </li> -->
+        </li>
         <li>
-            <a href="#" class="nav-link" data-bs-target="#comment-send-modal" data-bs-toggle="modal">
+            <a href="#" class="nav-link" data-bs-target="#send-comment-modal" data-bs-toggle="modal">
                 <i class="nav-icon bi-chat-right-text"></i>
                 コメント
             </a>

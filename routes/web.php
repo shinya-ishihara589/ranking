@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,19 +15,14 @@ use Illuminate\Support\Facades\Auth;
 */
 
 //ログイン
-Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'index']);
-Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'index']);      //ログイン画面
+Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);     //ログイン処理
+Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);    //ログアウト処理
 
-//ログアウト
-Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
+//アカウント登録
+Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);        //アカウント登録処理
+Route::post('/tmp_register', [App\Http\Controllers\Auth\RegisterController::class, 'tmpRegister']); //仮アカウント登録処理
 
-//ユーザー登録
-Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
-
-//ワンタイムパスワード発行
-Route::post('/tmp_register', [App\Http\Controllers\Auth\RegisterController::class, 'tmpRegister']);
-
-//以下ログインユーザーのみ実行可能
 Auth::routes();
 
 //ホーム
@@ -59,8 +55,8 @@ Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'update'
 Route::get('/friends/{userId}', [App\Http\Controllers\FriendController::class, 'index']);
 
 //設定
-// Route::get('/setting', [App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
-// Route::post('/setting', [App\Http\Controllers\SettingController::class, 'update']);
+Route::get('/setting', [App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
+Route::post('/setting', [App\Http\Controllers\SettingController::class, 'update']);
 
 //コメント
 Route::post('/comments/send/{parent_id?}', [App\Http\Controllers\CommentController::class, 'send']);

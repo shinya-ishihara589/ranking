@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendOnetimePasswordMail extends Mailable
+class SendTmpRegisterMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -27,6 +27,6 @@ class SendOnetimePasswordMail extends Mailable
      */
     public function build(): object
     {
-        return  $this->subject('ワンタイムパスワードの発行')->view('emails.issue-onetime-password');
+        return  $this->subject('ワンタイムパスワードの発行')->view('emails.tmp-register');
     }
 }

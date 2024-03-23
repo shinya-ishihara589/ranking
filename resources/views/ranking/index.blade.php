@@ -79,7 +79,7 @@
 @include('modals.add-item')
 
 <!-- 申請のモーダル画面の呼び出し -->
-@include('modals.apply-send')
+@include('modals.send-apply')
 
 <!-- フットの呼び出し -->
 @include('commons.foot')
