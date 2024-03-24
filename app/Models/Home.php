@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Home extends BaseModel
@@ -14,10 +12,12 @@ class Home extends BaseModel
     private $searchWords;   //あいまい検索ワード
     private $mode;          //画面の種類
     private $offset;        //取得開始数
-    private $userId;        //ユーザーID
+    private $homeIds;       //フレンドID
+    private $iconPath;      //アイコンパス
+    private $iconNullPath;  //アイコンパス無し
 
     /**
-     * コンストラクタ
+     * モデルのインスタンスを作成する
      * @param Object 検索情報
      */
     function __construct(object $request)
@@ -26,7 +26,9 @@ class Home extends BaseModel
         $this->searchWords = $this->getSearchWordsString($request->words);
         $this->mode = $request->mode;
         $this->offset = ($request->offset) ? $request->offset : 0;
-        $this->userId = Auth::id();
+        $this->homeIds = $this->getHomeIdsString();
+        $this->iconPath = asset('storage/users/');
+        $this->iconNullPath = '//ssl.gstatic.com/accounts/ui/avatar_2x.png';
     }
 
     /**
@@ -65,26 +67,24 @@ class Home extends BaseModel
         $sql = "
             (SELECT
                 'vote' AS home,
-                null AS comment,
-                votes.datetime,
-                votes.id,
-                votes.item_id,
-                null AS parent_id,
-                null AS status,
-                null AS text,
-                null AS type,
-                votes.user_id,
-                items.name
-            FROM
-                votes
-            LEFT JOIN 
-                items
-            ON
-                votes.item_id = items.id
-            WHERE
-                items.user_id = $this->userId
-            AND
-                items.id IS NOT NULL";
+                'bi bi-chat-right-heart' AS action_icon,
+                CASE
+                    WHEN profiles.icon_path IS NULL THEN '$this->iconNullPath'
+                    ELSE CONCAT('$this->iconPath', '/', users.user_id, '/', profiles.icon_path)
+                END AS profiles_icon_path,
+                CASE
+                    WHEN profiles.name IS NULL THEN users.user_id
+                    ELSE profiles.name
+                END AS profiles_name,
+                users.user_id AS users_user_id,
+                CONCAT('<a href=/ranking/', items.id, '>', items.name, '</a>') AS content,
+                votes.datetime AS datetime
+            FROM votes
+            LEFT JOIN items ON votes.item_id = items.id
+            LEFT JOIN users ON votes.user_id = users.id
+            LEFT JOIN profiles ON votes.user_id = profiles.user_id
+            WHERE items.user_id IN($this->homeIds)
+            AND items.id IS NOT NULL";
 
         if (!empty($this->searchWords)) {
             $sql .= " AND items.name REGEXP'($this->searchWords)'";
@@ -104,20 +104,22 @@ class Home extends BaseModel
         $sql = "
             (SELECT
                 'comment' AS home,
-                comments.comment,
-                comments.datetime,
-                comments.id,
-                null AS item_id,
-                comments.parent_id,
-                null AS status,
-                null AS text,
-                null AS type,
-                comments.user_id,
-                null AS name
-            FROM
-                comments
-            WHERE
-                user_id = $this->userId";
+                'bi bi-chat-right-text' AS action_icon,
+                CASE
+                    WHEN profiles.icon_path IS NULL THEN '$this->iconNullPath'
+                    ELSE CONCAT('$this->iconPath', '/', users.user_id, '/', profiles.icon_path)
+                END AS profiles_icon_path,
+                CASE
+                    WHEN profiles.name IS NULL THEN users.user_id
+                    ELSE profiles.name
+                END AS profiles_name,
+                users.user_id AS users_user_id,
+                comments.comment AS content,
+                comments.datetime AS datetime
+            FROM comments
+            LEFT JOIN users ON comments.user_id = users.id
+            LEFT JOIN profiles ON comments.user_id = profiles.user_id
+            WHERE comments.user_id IN($this->homeIds)";
 
         if (!empty($this->searchWords)) {
             $sql .= " AND comments.comment REGEXP'($this->searchWords)'";
@@ -137,26 +139,25 @@ class Home extends BaseModel
         $sql = "
             (SELECT
                 'discussion' AS home,
-                null AS comment,
-                discussions.datetime,
-                discussions.id,
-                discussions.item_id,
-                null AS parent_id,
-                discussions.status,
-                discussions.text,
-                discussions.type,
-                discussions.user_id,
-                items.name
-            FROM
-                discussions
-            LEFT JOIN
-                items
-            ON
-                discussions.item_id = items.id
-            WHERE
-                items.user_id = $this->userId
-            AND
-                items.id IS NOT NULL";
+                'bi bi-arrows-move' AS action_icon,
+                CASE
+                    WHEN profiles.icon_path IS NULL THEN '$this->iconNullPath'
+                    ELSE CONCAT('$this->iconPath', '/', users.user_id, '/', profiles.icon_path)
+                END AS profiles_icon_path,
+                CASE
+                    WHEN profiles.name IS NULL THEN users.user_id
+                    ELSE profiles.name
+                END AS profiles_name,
+                users.user_id AS users_user_id,
+                CONCAT(items.name, '<br>', comments.comment) AS content,
+                discussions.datetime AS datetime
+            FROM discussions
+            LEFT JOIN items ON discussions.item_id = items.id
+            LEFT JOIN users ON discussions.user_id = users.id
+            LEFT JOIN profiles ON discussions.user_id = profiles.user_id
+            LEFT JOIN comments ON discussions.user_id = comments.user_id
+            WHERE items.user_id IN($this->homeIds)
+            AND items.id IS NOT NULL";
 
         if (!empty($this->searchWords)) {
             $sql .= " AND items.name REGEXP'($this->searchWords)' OR discussions.text REGEXP'($this->searchWords)'";

@@ -157,6 +157,6 @@ return [
 
         'item' => '項目',
 
-        'comment' => 'コメント',
+        'send_comment_comment' => 'コメント',
     ],
 ];

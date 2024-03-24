@@ -11,7 +11,7 @@ class Friend extends Model
     use HasFactory;
 
     public $timestamps = false; //自動タイムスタンプをオフにする
-    
+
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'friend_id');

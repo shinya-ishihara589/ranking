@@ -17,8 +17,8 @@
 <table class="table align-middle">
     <thead class="fs-5 fw-bold">
         <tr>
-            <th scope="col" class="col-md-1 text-center">種類</th>
-            <th scope="col" class="col-md-4">行動</th>
+            <th scope="col" class="col-md-1 text-center">行動</th>
+            <th scope="col" class="col-md-8"></th>
             <th scope="col" class="col-md-2 text-center">日時</th>
         </tr>
     </thead>
@@ -26,23 +26,10 @@
         @foreach ($homeData as $home)
         <tr>
             <th class="text-center">
-                @if($home->home == 'vote')
-                投票
-                @elseif($home->home == 'comment')
-                コメント
-                @elseif($home->home == 'discussion')
-                議論
-                @endif
+                <i class="{{ $home->action_icon }}"></i><img src="{{ $home->profiles_icon_path }}" class="rounded-circle" width="32px" height="32px">
             </th>
-            <td class="text-left">
-                @if($home->home == 'vote')
-                <a href="/ranking/{{ $home->item_id }}">{{ $home->name }}</a>
-                @elseif($home->home == 'comment')
-                {!! nl2br(e($home->comment)) !!}
-                @elseif($home->home == 'discussion')
-                <a href="">{{ $home->name }}</a><br>
-                {{ $home->text }}
-                @endif
+            <td class="align-baseline">
+                <a href="/profile/{{ $home->users_user_id }}">{{ $home->profiles_name }}</a><br>{!! $home->content !!}
             </td>
             <td class="text-center">{{ $home->datetime }}</td>
         </tr>

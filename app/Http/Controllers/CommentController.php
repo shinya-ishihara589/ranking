@@ -21,7 +21,7 @@ class CommentController extends Controller
         $comment = new Comment;
         $comment->parent_id = $parent_id;
         $comment->user_id = $userId;
-        $comment->comment = $request->comment;
+        $comment->comment = $request->send_comment_comment;
         $comment->ip = $request->ip();
         $comment->save();
     }

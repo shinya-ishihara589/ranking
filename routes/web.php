@@ -55,8 +55,8 @@ Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'update'
 Route::get('/friends/{userId}', [App\Http\Controllers\FriendController::class, 'index']);
 
 //設定
-Route::get('/setting', [App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
-Route::post('/setting', [App\Http\Controllers\SettingController::class, 'update']);
+// Route::get('/setting', [App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
+// Route::post('/setting', [App\Http\Controllers\SettingController::class, 'update']);
 
 //コメント
 Route::post('/comments/send/{parent_id?}', [App\Http\Controllers\CommentController::class, 'send']);

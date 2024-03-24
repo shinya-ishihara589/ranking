@@ -17,9 +17,7 @@ class TmpRegisterController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * モデルのインスタンスを作成する
      */
     public function __construct()
     {
@@ -30,7 +28,7 @@ class TmpRegisterController extends Controller
      * 仮ユーザー登録を行う
      * @param Object 仮ユーザー登録情報
      */
-    public function tmpRegister(TmpRegisterFormRequest $request)
+    public function tmpRegister(TmpRegisterFormRequest $request): void
     {
         //ユーザーIDを取得する
         $userId = $request->tmp_register_user_id;

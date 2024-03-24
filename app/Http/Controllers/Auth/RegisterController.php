@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterFormRequest;
 use App\Mail\SendRegisterMail;
 use App\Models\TmpUser;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -19,9 +19,7 @@ class RegisterController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * モデルのインスタンスを作成する
      */
     public function __construct()
     {
@@ -32,7 +30,7 @@ class RegisterController extends Controller
      * ユーザー登録を行う
      * @param Object ユーザー登録情報
      */
-    public function register(RegisterFormRequest $request)
+    public function register(RegisterFormRequest $request): void
     {
         //ユーザーIDを取得する
         $userId = $request->register_user_id;

@@ -21,8 +21,8 @@
             {!! Form::close() !!}
         </div>
         <div>
-            <button class="btn btn-outline-danger rounded-pill col-lg-4" onClick="onOverlay()">
-                パスワードを忘れた方
+            <button class="btn btn-outline-danger rounded-pill col-lg-4" onClick="alert('未実装です。実装までお待ちください。')">
+                <s>パスワードを忘れた方</s>
             </button>
             <button class="btn btn-outline-success rounded-pill col-lg-4" data-bs-target="#tmp-register-modal" data-bs-toggle="modal">
                 アカウント登録

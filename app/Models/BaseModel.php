@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Friend;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class BaseModel extends Model
 {
@@ -60,6 +62,38 @@ class BaseModel extends Model
             }
         }
         return $searchWords;
+    }
+
+    /**
+     * ホーム画面のユーザーIDを文字列で取得する
+     * @return String ホーム画面のユーザーID
+     */
+    protected function getHomeIdsString(): string
+    {
+        //フレンドIDを取得する
+        $friends = Friend::where('user_id', Auth::id())->get();
+
+        //ホーム画面のユーザーIDを生成する
+        $homeIds = Auth::id();
+        foreach ($friends as $friend) {
+            $homeIds .= ",{$friend->friend_id}";
+        }
+        return $homeIds;
+    }
+
+    /**
+     * ホーム画面のユーザーIDを文字列で取得する
+     * @return Array ホーム画面のユーザーID
+     */
+    protected function getHomeIdsArray(): array
+    {
+        //フレンドIDを取得する
+        $friends = Friend::where('user_id', Auth::id())->get();
+
+        //ホーム画面のユーザーIDを生成する
+        $homeIds = Auth::id() + $friends;
+
+        return $homeIds;
     }
 
     /**

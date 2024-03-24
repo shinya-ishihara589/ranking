@@ -1,12 +1,12 @@
-@section('modals.tmp-register')
-<div class="modal" id="tmp-register-modal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+@section('modals.forget-password')
+<div class="modal" id="forget-password-modal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5">アカウント仮登録</h1>
-                <button class="btn-close" data-bs-dismiss="modal" onClick="clickCloseButton('tmp-register-form')"></button>
+                <button class="btn-close" data-bs-dismiss="modal" onClick="clickCloseButton('forget-password-form')"></button>
             </div>
-            <form class="modal-body mb-0" id="tmp-register-form">
+            <form class="modal-body mb-0" id="forget-password-form">
                 <div class="mb-3">
                     {!! Form::text('tmp_register_user_id', '', ['id' => 'tmp_register_user_id', 'class' => 'form-control input-field', 'placeholder' => 'ユーザーID']) !!}
                     <span class="invalid-feedback" id='tmp_register_user_id_error' role="alert"></span>
@@ -18,7 +18,7 @@
             </form>
             <div class="modal-footer">
                 <button class="btn btn-outline-secondary btn-sm rounded-pill" data-bs-dismiss="modal" onClick="clickCloseButton()">閉じる</button>
-                <button class="btn btn-outline-primary btn-sm rounded-pill" onClick="clickTmpRegisterButton(); alert('仮登録情報をメールアドレスに送信しました。')">仮登録</button>
+                <button class="btn btn-outline-primary btn-sm rounded-pill" onClick="clickForgetPasswordButton(); alert('仮登録情報をメールアドレスに送信しました。')">仮登録</button>
             </div>
         </div>
     </div>

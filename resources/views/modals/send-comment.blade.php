@@ -8,8 +8,8 @@
             </div>
             <form class="modal-body mb-0" id="send-comment-form">
                 <div>
-                    {!! Form::textarea('comment', '', ['id' => 'comment', 'class' => 'form-control input-field', 'placeholder' => 'コメント']) !!}
-                    <span class="invalid-feedback" id='comment_error' role="alert"></span>
+                    {!! Form::textarea('send_comment_comment', '', ['id' => 'send_comment_comment', 'class' => 'form-control input-field', 'placeholder' => 'コメント']) !!}
+                    <span class="invalid-feedback" id='send_comment_comment_error' role="alert"></span>
                 </div>
             </form>
             <div class="modal-footer">

@@ -148,30 +148,19 @@ function updateTable(data) {
     //テーブルを更新する
     let table = '';
     for (let i = 0; i < data.homeData.length; i++) {
-        //1.項目種類がvoteの場合は投票の処理を実行する
-        //2.項目種類がcommentの場合はコメントの処理を実行する
-        //3.項目種類がdiscussionの場合は投票の処理を実行する
-        if (data.homeData[i].home == 'vote') {
-            var type = '投票';
-            var action = `<a href="/ranking/all/${data.homeData[i].item_id}">`;
-            action += data.homeData[i].name == null ? '' : data.homeData[i].name;
-            action += '</a>';
-        } else if (data.homeData[i].home == 'comment') {
-            var type = 'コメント';
-            var action = data.homeData[i].comment.replace(/\r?\n/g, '<br>');
-        } else if (data.homeData[i].home == 'discussion') {
-            var type = '議論';
-            var action = `<a href="/ranking/all/${data.homeData[i].item_id}">`;
-            action += data.homeData[i].name == null ? '' : data.homeData[i].name;
-            action += '</a>';
-            action += '<br>';
-            action += data.homeData[i].text.replace(/\r?\n/g, '<br>');
-        }
+        //アクションアイコンを取得する
+        var actionIcon = `<i class="${data.homeData[i].action_icon}"></i>`;
+
+        //ユーザーアイコンを取得する
+        var userIcon = `<img src="${data.homeData[i].profiles_icon_path}" class="rounded-circle" width="32px" height="32px">`;
+
+        //ユーザー名を取得する
+        var userName = `<a href="/profile/${data.homeData[i].users_user_id}">${data.homeData[i].profiles_name}</a><br>`;
 
         //テーブルを追加する
         table += `<tr>`;
-        table += `<th class="text-center">${type}</th>`;
-        table += `<td class="text-left">${action}</td>`;
+        table += `<th class="text-center">${actionIcon}${userIcon}</th>`;
+        table += `<td class="align-baseline">${userName}${data.homeData[i].content}</td>`;
         table += `<td class="text-center">${data.homeData[i].datetime}</td>`;
         table += `</tr>`;
     }
@@ -183,8 +172,8 @@ function updateTable(data) {
 
 /**
  * クラス属性を更新する
- * @param {String} target 
- */
+ * @param {String} target
+        */
 function updateClass() {
     //画面情報を取得する
     let mode = $('#home-mode').val();

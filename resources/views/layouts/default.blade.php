@@ -10,14 +10,14 @@
         <div style="width: 20%;">
             @yield('commons.nav')
         </div>
-        <div style="width: 60%;">
+        <div style="width: 80%;">
             @yield('header')
             @yield('contents')
             @yield('footer')
         </div>
-        <div style="width: 20%;">
+        <!-- <div style="width: 20%;">
             @yield('commons.aside')
-        </div>
+        </div> -->
     </div>
     @yield('modals.add-item')
     @yield('modals.send-apply')
