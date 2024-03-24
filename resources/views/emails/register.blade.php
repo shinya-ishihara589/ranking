@@ -1,7 +1,7 @@
 @extends('emails.default')
 @section('content')
 <div>
-    ユーザーID：{{ $user_id }}<br>
+    ユーザーID{{ $userId }}<br>
     パスワード：{{ $password }}<br>
 </div>
 @endsection

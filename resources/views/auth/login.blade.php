@@ -13,7 +13,7 @@
             <img src="{{ asset('storage/developer/login_logo.jpg') }}" alt="Logo" width="100%" height="300px" class="d-inline-block align-text-top">
         </div>
         <div class="mb-3">
-            {!! Form::open(['method' => 'POST', 'route' => 'login', 'class' => 'form-signin']) !!}
+            {!! Form::open(['method' => 'POST', 'url' => '/login', 'class' => 'form-signin']) !!}
             <span id="reauth-email" class="reauth-email"></span>
             {!! Form::email('email', '', ['class' => 'rounded-pill col-lg-2 mb-3 form-control' . ( $errors->has('email') ? ' is-invalid' : '' ), 'placeholder' => 'メールアドレス', 'required', 'autofocus']) !!}
             {!! Form::password('password', ['class' => 'rounded-pill col-lg-2 mb-3 form-control' . ( $errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'パスワード', 'required']) !!}
@@ -33,10 +33,10 @@
 @endsection
 
 <!-- アカウント登録のモーダル画面の呼び出し -->
-@include('modals.register')
+@include('auth.modals.register')
 
 <!-- ワンタイムパスワード発行のモーダル画面の呼び出し -->
-@include('modals.tmp-register')
+@include('auth.modals.tmp-register')
 
 <!-- フットの呼び出し -->
 @include('commons.foot')

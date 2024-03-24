@@ -6,7 +6,7 @@ function onOverlay() {
     $('div').css('pointer-events', 'none');
 
     //ロードアイコンを表示する
-    $('#orverlay').removeClass('d-none');
+    $('#overlay').removeClass('d-none');
 }
 
 /**
@@ -17,5 +17,5 @@ function offOverlay() {
     $('div').css('pointer-events', 'auto');
 
     //ロードアイコンを非表示にする
-    $('#orverlay').addClass('d-none');
+    $('#overlay').addClass('d-none');
 }

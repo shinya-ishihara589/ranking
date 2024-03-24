@@ -1,15 +1,15 @@
-function clickButtonRegister() {
-    //機能名を取得する
-    let funcName = 'tmp_';
+function clickRegisterButton() {
+    //オーバーレイをONにする
+    onOverlay();
 
     //ユーザーIDを取得する
-    let user_id = $('#user_id').val();
-
-    //ワンタイムパスワードを取得する
-    let onetime_password = $('#onetime_password').val();
+    let registerUserId = $('#register_user_id').val();
 
     //メールアドレスを取得する
-    let email = $('#email').val();
+    let registerEmail = $('#register_user_id').val();
+
+    //ワンタイムパスワードを取得する
+    let registerOnetimePassword = $('#register_onetime_password').val();
 
     //URLを取得する
     let url = '/register';
@@ -22,9 +22,9 @@ function clickButtonRegister() {
         url: url,
         type: 'POST',
         data: {
-            'user_id': user_id,
-            'onetime_password': onetime_password,
-            'email': email
+            'register_user_id': registerUserId,
+            'register_email': registerEmail,
+            'register_onetime_password': registerOnetimePassword
         }
     }).done(function () {
         //入力欄を初期化する
@@ -32,15 +32,12 @@ function clickButtonRegister() {
 
         //モーダル画面を非表示にする
         $('#register-modal').modal('hide');
-
-        //モーダル画面を表示する
-        $('#register-modal').modal('show');
     }).fail(function (error) {
         //入力欄のエラーメッセージを非表示にする
         hideErrorMeaage();
 
         //入力欄のエラーメッセージを表示する
-        showErrorMeaage(error, funcName);
+        showErrorMeaage(error);
     }).always(function () {
         //オーバーレイをOFFにする
         offOverlay();

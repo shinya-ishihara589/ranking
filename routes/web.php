@@ -20,8 +20,8 @@ Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);    //ログアウト処理
 
 //アカウント登録
-Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);        //アカウント登録処理
-Route::post('/tmp_register', [App\Http\Controllers\Auth\RegisterController::class, 'tmpRegister']); //仮アカウント登録処理
+Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);            //アカウント登録処理
+Route::post('/tmp_register', [App\Http\Controllers\Auth\TmpRegisterController::class, 'tmpRegister']);  //仮アカウント登録処理
 
 Auth::routes();
 

@@ -10,17 +10,17 @@ class SendRegisterMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user_id;
+    public $userId;
     public $password;
 
     /**
      * インスタンス
      * @param String ワンタイムパスワード
      */
-    public function __construct($user_id, $password)
+    public function __construct($userId, $password)
     {
+        $this->userId = $userId;
         $this->password = $password;
-        $this->user_id = $user_id;
     }
 
     /**
@@ -29,6 +29,6 @@ class SendRegisterMail extends Mailable
      */
     public function build(): object
     {
-        return  $this->subject('アカウント登録が完了しました')->view('emails.tmp-register');
+        return  $this->subject('アカウント登録が完了しました')->view('emails.register');
     }
 }

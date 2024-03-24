@@ -145,6 +145,11 @@ return [
         'email' => 'メールアドレス',
         'password' => 'パスワード',
 
+        'register_onetime_password' => 'ワンタイムパスワード',
+
+        'tmp_register_user_id' => 'ユーザーID',
+        'tmp_register_email' => 'メールアドレス',
+
         'name' => '名前',
         'self_introduction' => '自己紹介',
         'banner' => 'バナー',

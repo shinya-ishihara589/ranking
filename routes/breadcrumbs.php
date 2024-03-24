@@ -59,3 +59,9 @@ Breadcrumbs::for('discussions.detail', function (BreadcrumbTrail $trail, $itemDa
     $trail->push('詳細', 'discussions.detail');
     $trail->push('詳細', route('discussions.detail'));
 });
+
+//議論 第3階層
+Breadcrumbs::for('setting.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home.index');
+    $trail->push('設定', route('setting.index'));
+});

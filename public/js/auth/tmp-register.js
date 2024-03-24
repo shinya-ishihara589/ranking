@@ -1,15 +1,12 @@
-function clickButtonTmpRegister() {
+function clickTmpRegisterButton() {
     //オーバーレイをONにする
     onOverlay();
 
-    //機能名を取得する
-    let funcName = 'tmp_';
-
     //仮ユーザーIDを取得する
-    let tmpUserId = $('#tmp_user_id').val();
+    let tmpRegisterUserId = $('#tmp_register_user_id').val();
 
     //仮メールアドレスを取得する
-    let tmpEmail = $('#tmp_email').val();
+    let tmpRegisterEmail = $('#tmp_register_email').val();
 
     //URLを取得する
     let url = '/tmp_register';
@@ -22,10 +19,16 @@ function clickButtonTmpRegister() {
         url: url,
         type: 'POST',
         data: {
-            'user_id': tmpUserId,
-            'email': tmpEmail
+            'tmp_register_user_id': tmpRegisterUserId,
+            'tmp_register_email': tmpRegisterEmail
         }
     }).done(function () {
+        //ユーザーIDを取得する
+        $('#register_user_id').val(tmpRegisterUserId);
+
+        //メールアドレスを取得する
+        $('#register_email').val(tmpRegisterEmail);
+
         //入力欄を初期化する
         resetInput('tmp-register-form');
 
@@ -39,7 +42,7 @@ function clickButtonTmpRegister() {
         hideErrorMeaage();
 
         //入力欄のエラーメッセージを表示する
-        showErrorMeaage(error, funcName);
+        showErrorMeaage(error);
     }).always(function () {
         //オーバーレイをOFFにする
         offOverlay();

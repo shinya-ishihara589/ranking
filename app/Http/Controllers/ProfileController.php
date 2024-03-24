@@ -51,14 +51,22 @@ class ProfileController extends Controller
 
         //バナーファイルを保存する
         if ($bannerFile) {
-            $profileData->banner_path = 'banner.jpg';
-            Storage::putFileAs("/public/users/{$authUser->user_id}/", $bannerFile, 'banner.jpg');
+            $uniqId = uniqid();
+            $beforeBannerPath = $profileData->banner_path;
+            $afterBannerPath = "{$uniqId}.jpg";
+            Storage::putFileAs("/public/users/{$authUser->user_id}/", $bannerFile, $afterBannerPath);
+            Storage::delete("/public/users/{$authUser->user_id}/{$beforeBannerPath}");
+            $profileData->banner_path = $afterBannerPath;
         }
 
         //アイコンファイルを保存する
         if ($iconFile) {
-            $profileData->icon_path = 'icon.jpg';
-            Storage::putFileAs("/public/users/{$authUser->user_id}/", $iconFile, 'icon.jpg');
+            $uniqId = uniqid();
+            $beforeIconPath = $profileData->icon_path;
+            $afterIconPath = "{$uniqId}.jpg";
+            Storage::putFileAs("/public/users/{$authUser->user_id}/", $iconFile, $afterIconPath);
+            Storage::delete("/public/users/{$authUser->user_id}/{$beforeIconPath}");
+            $profileData->icon_path = $afterIconPath;
         }
         $profileData->save();
 

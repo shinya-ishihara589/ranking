@@ -10,6 +10,9 @@
 <!-- ナビゲーションの呼び出し -->
 @include('commons.nav')
 
+<!-- ヘッダーの呼び出し -->
+@include('setting.header')
+
 <!-- ランキング -->
 {!! Form::open(['url' => '/setting', 'method' => 'POST', 'class' => 'd-flex']) !!}
 {!! Form::text('email', $userData->email, ['class' => 'form-control me-1 rounded-pill', 'id' => 'home-words', 'placeholder' => '検索ワード']) !!}

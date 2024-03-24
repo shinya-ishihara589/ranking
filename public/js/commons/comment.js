@@ -32,7 +32,7 @@ function clickSendCommentButton() {
         hideErrorMeaage();
 
         //入力欄のエラーメッセージを表示する
-        showErrorMeaage(error, funcName);
+        showErrorMeaage(error);
     }).always(function () {
         //オーバーレイをOFFにする
         offOverlay();

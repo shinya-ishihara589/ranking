@@ -3,7 +3,7 @@
     <ul class="fs-5 nav nav-pills flex-column mb-auto">
         <div class="container-fluid">
             <a class="top-50 start-50 translate-middle">
-                <img src="{{ asset('storage/users/seeder/icon.jpg') }}" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
+                <img src="{{ asset('storage/developer/common_logo.jpg') }}" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
             </a>
         </div>
         <li>

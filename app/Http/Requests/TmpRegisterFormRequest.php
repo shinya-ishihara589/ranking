@@ -2,12 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\CheckOnetimePassword;
-use App\Rules\CheckValidityPeriodOnetimePassword;
+use App\Rules\UniqueTmpRegister;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class RegisterFormRequest extends FormRequest
+class TmpRegisterFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +24,18 @@ class RegisterFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'register_onetime_password' => [
+            'tmp_register_user_id' => [
                 'required',
                 'max:255',
-                new CheckValidityPeriodOnetimePassword($this->register_user_id, $this->register_email),
-                new CheckOnetimePassword($this->register_user_id, $this->register_email),
+                Rule::unique('users', 'user_id')->where('user_id', $this->tmp_register_user_id)->whereNull('deleted_at'),
+                new UniqueTmpRegister('user_id'),
+            ],
+            'tmp_register_email' => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('users', 'email')->where('email', $this->tmp_register_email)->whereNull('deleted_at'),
+                new UniqueTmpRegister('email'),
             ],
         ];
     }
