@@ -83,7 +83,7 @@ class Home extends BaseModel
             LEFT JOIN items ON votes.item_id = items.id
             LEFT JOIN users ON votes.user_id = users.id
             LEFT JOIN profiles ON votes.user_id = profiles.user_id
-            WHERE items.user_id IN($this->homeIds)
+            WHERE votes.user_id IN($this->homeIds)
             AND items.id IS NOT NULL";
 
         if (!empty($this->searchWords)) {
@@ -156,7 +156,7 @@ class Home extends BaseModel
             LEFT JOIN users ON discussions.user_id = users.id
             LEFT JOIN profiles ON discussions.user_id = profiles.user_id
             LEFT JOIN comments ON discussions.user_id = comments.user_id
-            WHERE items.user_id IN($this->homeIds)
+            WHERE comments.user_id IN($this->homeIds)
             AND items.id IS NOT NULL";
 
         if (!empty($this->searchWords)) {
