@@ -18,18 +18,14 @@ class RegisterTest extends TestCase
     public function test_tmp_register()
     {
         //バリデーションのテストを行う
-        //1.ユーザーID:tmp_register_user_id:required|max:255|
+        //1.ユーザーID:tmp_register_user_id:必須|0文字-255文字|
         //2.メールアドレス:tmp_register_email:required|max:255|email|
 
         //メールアドレスとパスワードが未入力
-        $response = $this->post('/tmp_register', ['tmp_register_user_id' => '', 'tmp_register_email' => 'email@gmail.com']);
-        foreach ($response->baseResponse as $key => $respons) {
-            dd($respons, $key, $response->baseResponse);
-        }
-        $this->assertFalse($response['result']);
-        $this->assertEquals('ユーザーIDは、必ず指定してください。', $response['message']);
-        $this->assertTrue(empty($response['user']));
-
-        $this->assertTrue(true);
+        $response = $this->post('/tmp_register', ['tmp_register_user_id' => '', 'tmp_register_email' => '']);
+        // $response->assertStatus(302);
+        $response->setAccessible(false);
+        $response->assertSee('ユーザーIDは、必ず指定してください。');
+        dd($response);
     }
 }

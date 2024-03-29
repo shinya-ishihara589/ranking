@@ -22,8 +22,8 @@ class ProfileFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:50',
-            'self_introduction' => 'required|max:255',
+            'edit_profile_name' => 'required|max:50',
+            'edit_profile_self_introduction' => 'required|max:300',
         ];
     }
 }

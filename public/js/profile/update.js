@@ -3,7 +3,7 @@ function clickButtonUpdateProfile() {
     onOverlay();
 
     //フォーム情報を取得する
-    let formData = new FormData($('#edit-profile-modal-form').get()[0]);
+    let formData = new FormData($('#edit-profile-form').get()[0]);
 
     //URLを取得する
     let url = `/profile`;
@@ -23,8 +23,8 @@ function clickButtonUpdateProfile() {
         let selfIntroduction = data.profileData.self_introduction.replace(/\r?\n/g, '<br>');
 
         //プロフィール情報を変更する
-        $('#profile-name').text(data.profileData.name);
-        $('#profile-self-introduction').html(selfIntroduction);
+        $('#edit_profile_name').text(data.profileData.name);
+        $('#edit_profile_self_introduction').html(selfIntroduction);
 
         //モーダル画面を表示にする
         $('#edit-profile-modal').modal('hide');

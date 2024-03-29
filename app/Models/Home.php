@@ -53,7 +53,7 @@ class Home extends BaseModel
             $sql .= $this->getSqlDiscussionsTable();
         }
 
-        $sql .= " ) AS hone_data ORDER BY datetime DESC LIMIT 10 OFFSET $this->offset;";
+        $sql .= " ) AS datetime ORDER BY datetime DESC LIMIT 10 OFFSET $this->offset;";
 
         return DB::select($sql);
     }
@@ -83,8 +83,7 @@ class Home extends BaseModel
             LEFT JOIN items ON votes.item_id = items.id
             LEFT JOIN users ON votes.user_id = users.id
             LEFT JOIN profiles ON votes.user_id = profiles.user_id
-            WHERE votes.user_id IN($this->homeIds)
-            AND items.id IS NOT NULL";
+            WHERE votes.user_id IN($this->homeIds) AND items.id IS NOT NULL";
 
         if (!empty($this->searchWords)) {
             $sql .= " AND items.name REGEXP'($this->searchWords)'";
@@ -149,15 +148,14 @@ class Home extends BaseModel
                     ELSE profiles.name
                 END AS profiles_name,
                 users.user_id AS users_user_id,
-                CONCAT(items.name, '<br>', comments.comment) AS content,
+                CONCAT('<a href=/discussions/', items.id, '>', items.name, '</a><br>', comments.comment) AS content,
                 discussions.datetime AS datetime
             FROM discussions
             LEFT JOIN items ON discussions.item_id = items.id
             LEFT JOIN users ON discussions.user_id = users.id
             LEFT JOIN profiles ON discussions.user_id = profiles.user_id
             LEFT JOIN comments ON discussions.user_id = comments.user_id
-            WHERE comments.user_id IN($this->homeIds)
-            AND items.id IS NOT NULL";
+            WHERE comments.user_id IN($this->homeIds) AND items.id IS NOT NULL";
 
         if (!empty($this->searchWords)) {
             $sql .= " AND items.name REGEXP'($this->searchWords)' OR discussions.text REGEXP'($this->searchWords)'";

@@ -46,8 +46,8 @@ class ProfileController extends Controller
         $profileData = Profile::find($authUser->id);
 
         //プロフィールを更新する
-        $profileData->name = $request->name;
-        $profileData->self_introduction = $request->self_introduction;
+        $profileData->name = $request->edit_profile_name;
+        $profileData->self_introduction = $request->edit_profile_self_introduction;
 
         //バナーファイルを保存する
         if ($bannerFile) {

@@ -2,44 +2,81 @@
 <nav class="d-flex p-3 sticky-top">
     <ul class="fs-5 nav nav-pills flex-column mb-auto">
         <div class="container-fluid">
-            <a class="top-50 start-50 translate-middle">
-                <img src="{{ asset('storage/developer/common_logo.jpg') }}" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
-            </a>
+            <div class='d-none d-lg-block'>
+                <a class="top-50 start-50 translate-middle">
+                    <img src="{{ asset('storage/developer/common_logo.jpg') }}" alt="Logo" width="64px" height="64px" class="d-inline-block align-text-top">
+                </a>
+            </div>
+            <div class='d-lg-none text-center'>
+                <a class="top-50 start-50 translate-middle">
+                    <img src="{{ asset('storage/developer/common_logo.jpg') }}" alt="Logo" width="32px" height="32px" class="d-inline-block align-text-top">
+                </a>
+            </div>
         </div>
         <li>
             <a href="/" class="nav-link">
-                <i class="nav-icon bi-house-door"></i>
-                ホーム
+                <div class='d-none d-lg-block'>
+                    <i class="nav-icon bi-house-door"></i>
+                    ホーム
+                </div>
+                <div class='d-lg-none text-center'>
+                    <i class="nav-icon bi-house-door"></i>
+                </div>
             </a>
         </li>
         <li>
             <a href="/ranking" class="nav-link">
-                <i class="nav-icon bi-clipboard-data"></i>
-                ランキング
+                <div class='d-none d-lg-block'>
+                    <i class="nav-icon bi-clipboard-data"></i>
+                    ランキング
+                </div>
+                <div class='d-lg-none text-center'>
+                    <i class="nav-icon bi-clipboard-data"></i>
+                </div>
             </a>
         </li>
         <li>
             <a href="/search" class="nav-link">
-                <i class="nav-icon bi-search"></i>
-                検索
+                <div class='d-none d-lg-block'>
+                    <i class="nav-icon bi-search"></i>
+                    検索
+                </div>
+                <div class='d-lg-none text-center'>
+                    <i class="nav-icon bi-search"></i>
+                </div>
             </a>
         </li>
         <li>
             <a href="/notifications" class="nav-link">
-                <i class="nav-icon bi-bell"></i>
-                通知
+                <div class='d-none d-lg-block'>
+                    <i class="nav-icon bi-bell"></i>
+                    通知
+                </div>
+                <div class='d-lg-none text-center'>
+                    <i class="nav-icon bi-bell"></i>
+                </div>
             </a>
         </li>
         <li>
             <a href="/discussions" class="nav-link">
-                <i class="nav-icon bi-people"></i>
-                議論
+                <div class='d-none d-lg-block'>
+                    <i class="nav-icon bi-people"></i>
+                    議論
+                </div>
+                <div class='d-lg-none text-center'>
+                    <i class="nav-icon bi-people"></i>
+                </div>
             </a>
         </li>
         <li>
             <a href="/profile/{{ $commons['user_id'] }}" class="nav-link">
-                <i class="nav-icon bi-person"></i>
-                プロフィール
+                <div class='d-none d-lg-block'>
+                    <i class="nav-icon bi-person"></i>
+                    プロフィール
+                </div>
+                <div class='d-lg-none text-center'>
+                    <i class="nav-icon bi-person"></i>
+                </div>
             </a>
         </li>
         <!-- <li>
@@ -50,8 +87,13 @@
         </li> -->
         <li>
             <a href="#" class="nav-link" data-bs-target="#send-comment-modal" data-bs-toggle="modal">
-                <i class="nav-icon bi-chat-right-text"></i>
-                コメント
+                <div class='d-none d-lg-block'>
+                    <i class="nav-icon bi-chat-right-text"></i>
+                    コメント
+                </div>
+                <div class='d-lg-none text-center'>
+                    <i class="nav-icon bi-chat-right-text"></i>
+                </div>
             </a>
         </li>
         <li>
