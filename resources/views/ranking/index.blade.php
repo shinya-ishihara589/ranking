@@ -19,7 +19,7 @@
     <thead class="fs-4 fw-bold">
         <tr>
             <th scope="col" class="col-md-1 text-center">
-                <button type="button" class="btn btn-outline-warning btn-sm rounded-pill" data-bs-target="#apply-send-modal" data-bs-toggle="modal">申請</button>
+                <button type="button" class="btn btn-outline-warning btn-sm rounded-pill" data-bs-target="#send-apply-modal" data-bs-toggle="modal">申請</button>
             </th>
             <th scope="col" class="col-md-4 text-primary" id="item-id-{{ $itemData->id }}">{{ $itemData->name }}</th>
             <th scope="col" class="col-md-1 text-center text-primary" id="ranking-head-table-vote">{{ $itemData->votes_count }}</th>
@@ -84,7 +84,7 @@
 <!-- フットの呼び出し -->
 @include('commons.foot')
 
-<script src="/js/sends/apply.js"></script>
+<script src="/js/apply/send.js"></script>
 <script src="/js/adds/item.js"></script>
 
 <script src="/js/ranking/update-table.js"></script>

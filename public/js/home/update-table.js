@@ -157,10 +157,16 @@ function updateTable(data) {
         //ユーザー名を取得する
         var userName = `<a href="/profile/${data.homeData[i].users_user_id}">${data.homeData[i].profiles_name}</a><br>`;
 
+        //コンテントを取得する
+        var content = data.homeData[i].content;
+        if (data.homeData[i].action_icon == 'bi bi-chat-right-text') {
+            content = content.replace(/\r?\n/g, '<br>');;
+        }
+
         //テーブルを追加する
         table += `<tr>`;
         table += `<th class="text-center">${actionIcon}${userIcon}</th>`;
-        table += `<td class="align-baseline">${userName}${data.homeData[i].content}</td>`;
+        table += `<td class="align-baseline">${userName}${content}</td>`;
         table += `<td class="text-center">${data.homeData[i].datetime}</td>`;
         table += `</tr>`;
     }
@@ -173,7 +179,7 @@ function updateTable(data) {
 /**
  * クラス属性を更新する
  * @param {String} target
-        */
+ */
 function updateClass() {
     //画面情報を取得する
     let mode = $('#home-mode').val();

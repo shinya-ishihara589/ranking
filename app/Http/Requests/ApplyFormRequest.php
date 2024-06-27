@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Common;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ApplyFormRequest extends FormRequest
 {
@@ -22,7 +24,11 @@ class ApplyFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'text' => 'required|max:1000',
+            'send_apply_type' => [
+                'required',
+                Rule::in(Common::getApplyTypes()),
+            ],
+            'send_apply_text' => 'required|max:1000',
         ];
     }
 }

@@ -158,5 +158,8 @@ return [
         'item' => '項目',
 
         'send_comment_comment' => 'コメント',
+
+        'send_apply_type' => '申請種類',
+        'send_apply_text' => '申請内容',
     ],
 ];

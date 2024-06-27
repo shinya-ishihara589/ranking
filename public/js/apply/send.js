@@ -1,9 +1,12 @@
-function clickButtonApplySend(itemId) {
+function clickSendApplyButton(itemId) {
+    //オーバーレイをONにする
+    onOverlay();
+
     //申請の種類を取得する
-    let type = $('#type').val();
+    let sendApplyType = $('#send_apply_type').val();
 
     //申請テキストを取得する
-    let text = $('#text').val();
+    let sendApplyText = $('#send_apply_text').val();
 
     //URLを取得する
     let url = `/apply/send`;
@@ -16,21 +19,26 @@ function clickButtonApplySend(itemId) {
         url: url,
         type: 'POST',
         data: {
-            'type': type,
-            'text': text,
+            'send_apply_type': sendApplyType,
+            'send_apply_text': sendApplyText,
             'item_id': itemId
         }
-    }).done(function () {
+    }).done(function (data) {
+        console.log(data);
         //アラートメッセージを表示する
         alert('申告の送信が完了しました。');
 
         //モーダル画面を非表示にする
-        $('#apply-send-modal').modal('hide');
+        $('#send-apply-modal').modal('hide');
     }).fail(function (error) {
         //入力欄のエラーメッセージを非表示にする
         hideErrorMeaage();
 
         //入力欄のエラーメッセージを表示する
         showErrorMeaage(error);
+    }).always(function () {
+        //オーバーレイをOFFにする
+        offOverlay();
     });
 }
+

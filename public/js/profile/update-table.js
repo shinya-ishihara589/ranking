@@ -50,7 +50,7 @@ function updateTable(data) {
         //3.項目種類がdiscussionの場合は投票の処理を実行する
         if (data.profileData[i].home == 'vote') {
             var type = '投票';
-            var action = `<a href="/ranking/all/${data.profileData[i].item_id}">`;
+            var action = `<a href="/ranking/${data.profileData[i].item_id}">`;
             action += data.profileData[i].name == null ? '' : data.profileData[i].name;
             action += '</a>';
         } else if (data.profileData[i].home == 'comment') {
@@ -58,7 +58,7 @@ function updateTable(data) {
             var action = data.profileData[i].comment.replace(/\r?\n/g, '<br>');
         } else if (data.profileData[i].home == 'discussion') {
             var type = '議論';
-            var action = `<a href="/ranking/all/${data.profileData[i].item_id}">`;
+            var action = `<a href="/ranking/${data.profileData[i].item_id}">`;
             action += data.profileData[i].name == null ? '' : data.profileData[i].name;
             action += '</a>';
             action += '<br>';

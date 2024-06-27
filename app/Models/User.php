@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Constract;
 use App\Models\Comment;
 use App\Models\Friend;
 use App\Models\Profile;
+use App\Models\Status;
 use App\Models\Vote;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -57,6 +59,14 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class, 'user_id', 'id');
     }
 
+    /**
+     * ユーザーに紐づくプロフィールを取得する
+     */
+    public function status()
+    {
+        return $this->hasOne(Status::class, 'user_id', 'id');
+    }
+
     public function votes()
     {
         return $this->hasMany(Vote::class, 'user_id', 'id');
@@ -65,5 +75,21 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class, 'user_id', 'id');
+    }
+
+    /**
+     * 管理者であることを確認する
+     */
+    public function isAdmin()
+    {
+        return $this->role === Constract::ADMIN;
+    }
+
+    /**
+     * ユーザーであることを確認する
+     */
+    public function isUser()
+    {
+        return $this->role === Constract::USER;
     }
 }

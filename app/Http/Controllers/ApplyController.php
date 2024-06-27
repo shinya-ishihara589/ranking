@@ -19,10 +19,10 @@ class ApplyController extends Controller
 
         //申請を追加する
         $item = new Apply;
-        $item->type = $request->type;
+        $item->type = $request->send_apply_type;
         $item->user_id = $userId;
         $item->item_id = $request->item_id;
-        $item->text = $request->text;
+        $item->text = $request->send_apply_text;
         $item->ip = $request->ip();
         $item->save();
     }

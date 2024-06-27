@@ -29,7 +29,12 @@
                 <i class="{{ $home->action_icon }}"></i><img src="{{ $home->profiles_icon_path }}" class="rounded-circle" width="32px" height="32px">
             </th>
             <td class="align-baseline">
-                <a href="/profile/{{ $home->users_user_id }}">{{ $home->profiles_name }}</a><br>{!! $home->content !!}
+                <a href="/profile/{{ $home->users_user_id }}">{{ $home->profiles_name }}</a><br>
+                @if ($home->action_icon == 'bi bi-chat-right-text')
+                {!! nl2br(e($home->content)) !!}
+                @else
+                {!! $home->content !!}
+                @endif
             </td>
             <td class="text-center">{{ $home->datetime }}</td>
         </tr>
