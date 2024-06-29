@@ -28,6 +28,10 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $guarded = [
+        'id',
+    ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -46,41 +50,56 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function friends()
+    /**
+     * ユーザーに紐づくフレンド情報を全て取得する
+     * @return Object ユーザーに紐づくフレンド情報全て
+     */
+    public function friends(): object
     {
         return $this->hasMany(Friend::class, 'user_id', 'id');
     }
 
     /**
-     * ユーザーに紐づくプロフィールを取得する
+     * ユーザーに紐づくプロフィール情報を取得する
+     * @return Object ユーザーに紐づくプロフィール情報
      */
-    public function profile()
+    public function profile(): object
     {
         return $this->hasOne(Profile::class, 'user_id', 'id');
     }
 
     /**
-     * ユーザーに紐づくプロフィールを取得する
+     * ユーザーに紐づくステータス情報を取得する
+     * @return Object ユーザーに紐づくステータス情報
      */
-    public function status()
+    public function status(): object
     {
         return $this->hasOne(Status::class, 'user_id', 'id');
     }
 
-    public function votes()
+    /**
+     * ユーザーに紐づく投票情報を全て取得する
+     * @return Object ユーザーに紐づく投票情報
+     */
+    public function votes(): object
     {
         return $this->hasMany(Vote::class, 'user_id', 'id');
     }
 
-    public function comments()
+    /**
+     * ユーザーに紐づくコメント情報を全て取得する
+     * @return Object ユーザーに紐づくコメント情報
+     */
+    public function comments(): object
     {
         return $this->hasMany(Comment::class, 'user_id', 'id');
     }
 
     /**
      * 管理者であることを確認する
+     * @return Boolean 
      */
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         return $this->role === Constract::ADMIN;
     }
@@ -88,7 +107,7 @@ class User extends Authenticatable
     /**
      * ユーザーであることを確認する
      */
-    public function isUser()
+    public function isUser(): bool
     {
         return $this->role === Constract::USER;
     }

@@ -110,16 +110,14 @@ class Ranking extends BaseModel
 
         //1.画面の種類が「yearly」の場合は「当年/1/1 00:00:00」を取得する
         //2.画面の種類が「monthly」の場合は「当年/当月/1 00:00:00」を取得する
-        //3.画面の種類が「weekly」の場合は「当年/当月/今週の日曜日 00:00:00」を取得する
+        //3.画面の種類が「weekly」の場合は「当年/当月/当週の日曜日 00:00:00」を取得する
         //4.画面の種類が「daily」の場合は「当年/当月/当日 00:00:00」を取得する
         if ($mode == 'yearly') {
             $searchDate = $now->format('Y/1/1 00:00:00');
         } else if ($mode == 'monthly') {
             $searchDate = $now->format('Y/m/1 00:00:00');
         } else if ($mode == 'weekly') {
-            //日曜日の日付を取得する
-            $day = $now->subDay($now->dayOfWeek)->format('d');
-            $searchDate = $now->format("Y/m/{$day} 00:00:00");
+            $searchDate = $now->subDay($now->dayOfWeek)->format("Y/m/d 00:00:00");
         } else if ($mode == 'daily') {
             $searchDate = $now->format('Y/m/d 00:00:00');
         }
