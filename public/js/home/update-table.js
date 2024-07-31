@@ -185,9 +185,9 @@ function updateClass() {
     let mode = $('#home-mode').val();
 
     //画面情報を更新する
-    $('.change-button').removeClass('btn-primary')
-    $('.change-button').removeClass('btn-outline-primary')
-    $('.change-button').addClass('btn-outline-primary')
-    $(`#button-${mode}`).removeClass('btn-outline-primary')
+    $('.change-button').removeClass('btn-primary');
+    $('.change-button').removeClass('btn-outline-primary');
+    $('.change-button').addClass('btn-outline-primary');
+    $(`#button-${mode}`).removeClass('btn-outline-primary');
     $(`#button-${mode}`).addClass('btn-primary');
 }

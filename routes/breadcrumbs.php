@@ -54,7 +54,7 @@ Breadcrumbs::for('discussions.index', function (BreadcrumbTrail $trail) {
 });
 
 //議論 第3階層
-Breadcrumbs::for('discussions.detail', function (BreadcrumbTrail $trail, $itemData) {
+Breadcrumbs::for('discussions.detail', function (BreadcrumbTrail $trail) {
     $trail->parent('discussions.index');
     $trail->push('詳細', 'discussions.detail');
     $trail->push('詳細', route('discussions.detail'));

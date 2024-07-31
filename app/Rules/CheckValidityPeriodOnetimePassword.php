@@ -37,7 +37,6 @@ class CheckValidityPeriodOnetimePassword implements ValidationRule
         //1時間前を取得する
         $atHourAgo = $nowDateTime->subHour()->format('Y-m-d H:i:s');
 
-
         //仮登録ユーザーを取得する
         $tmpUserExists = TmpUser::where('user_id', $this->userId)
             ->where('email', $this->email)
