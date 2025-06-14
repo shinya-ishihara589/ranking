@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Common;
 use App\Models\Item;
-use App\Models\Ranking;
+use App\Services\RankingService;
 use App\Models\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,14 +17,14 @@ class RankingController extends Controller
      * @param Integer 項目ID
      * @return Object ランキング情報
      */
-    public function index(Request $request, int $itemId = null): object
+    public function index(Request $request, ?int $itemId = null): object
     {
         //ランキング情報を取得する
-        $rankingModel = new Ranking($request, $itemId);
-        $rankingData = $rankingModel->getRankingData();
+        $rankingModel = new RankingService;
+        $rankingData = $rankingModel->getRankingData($request, $itemId);
 
         //項目情報を取得する
-        $itemData = $rankingModel->getItemData();
+        $itemData = $rankingModel->getItemData($request, $itemId);
 
         //申請種類を取得する
         $applyTypes = Common::getApplyTypes();
@@ -38,14 +38,14 @@ class RankingController extends Controller
      * @param Integer 項目ID
      * @return Object ランキング情報
      */
-    public function get(Request $request, int $itemId = null): array
+    public function get(Request $request, ?int $itemId = null): array
     {
         //ランキング情報を取得する
-        $rankingModel = new Ranking($request, $itemId);
-        $rankingData = $rankingModel->getRankingData();
+        $rankingModel = new RankingService;
+        $rankingData = $rankingModel->getRankingData($request, $itemId);
 
         //項目情報を取得する
-        $itemData = $rankingModel->getItemData();
+        $itemData = $rankingModel->getItemData($request, $itemId);
 
         //申請種類を取得する
         $applyTypes = Common::getApplyTypes();
@@ -74,11 +74,11 @@ class RankingController extends Controller
         $vote->save();
 
         //ランキング情報を取得する
-        $rankingModel = new Ranking($request, $request->itemId);
-        $rankingData = $rankingModel->getRankingData();
+        $rankingModel = new RankingService();
+        $rankingData = $rankingModel->getRankingData($request, $request->itemId);
 
         //項目情報を取得する
-        $itemData = $rankingModel->getItemData($request->itemId);
+        $itemData = $rankingModel->getItemData($request, $request->itemId);
 
         return compact(['rankingData', 'itemData']);
     }
