@@ -23,16 +23,13 @@ class RankingController extends Controller
         $rankingModel = new Ranking($request, $itemId);
         $rankingData = $rankingModel->getRankingData();
 
-        //パンくずリストを取得する
-        $breadcrumbs = $rankingModel->getBreadcrumbs();
-
         //項目情報を取得する
         $itemData = $rankingModel->getItemData();
 
         //申請種類を取得する
         $applyTypes = Common::getApplyTypes();
 
-        return view('ranking.index', compact(['rankingData', 'breadcrumbs', 'itemId', 'itemData', 'applyTypes']));
+        return view('ranking.index', compact(['rankingData', 'itemId', 'itemData', 'applyTypes']));
     }
 
     /**
@@ -47,16 +44,13 @@ class RankingController extends Controller
         $rankingModel = new Ranking($request, $itemId);
         $rankingData = $rankingModel->getRankingData();
 
-        //パンくずリストを取得する
-        $breadcrumbs = $rankingModel->getBreadcrumbs();
-
         //項目情報を取得する
         $itemData = $rankingModel->getItemData();
 
         //申請種類を取得する
         $applyTypes = Common::getApplyTypes();
 
-        return compact(['rankingData', 'breadcrumbs', 'itemId', 'itemData', 'applyTypes']);
+        return compact(['rankingData', 'itemId', 'itemData', 'applyTypes']);
     }
 
     /**

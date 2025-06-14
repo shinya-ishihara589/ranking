@@ -21,7 +21,7 @@ class Ranking extends BaseModel
      * @param Object 検索情報
      * @param String 項目ID
      */
-    function __construct(object $request, int $itemId = null)
+    function __construct(object $request, ?int $itemId = null)
     {
         $this->searchWords = $this->getSearchWordsArray($request->words);
         $this->searchDate = $this->getSearchDate($request->mode);
@@ -61,24 +61,6 @@ class Ranking extends BaseModel
     }
 
     /**
-     * 項目IDから全ての親項目を取得する
-     * @return Array 項目IDに紐づく全ての親項目
-     */
-    public function getBreadcrumbs(): array
-    {
-        //項目情報を取得する
-        $item = Item::with(['item'])->find($this->itemId);
-
-        //パンくずリストを生成する
-        $breadcrumbs = [];
-        while (!empty($item)) {
-            isset($item->name) ? $breadcrumbs[] = ['id' => $item->id, 'name' => $item->name] : '';
-            $item = isset($item->item) ? $item->item : '';
-        }
-        return $breadcrumbs;
-    }
-
-    /**
      * 項目IDから項目に紐づく投票数の合計を取得する
      * @return Integer 投票数の合計(votes_count)
      */
@@ -100,7 +82,7 @@ class Ranking extends BaseModel
      * @param String 画面の種類
      * @return String 検索期間
      */
-    private function getSearchDate(string $mode = null): string
+    private function getSearchDate(?string $mode = null): string
     {
         //検索期間を初期化する
         $searchDate = '';

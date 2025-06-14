@@ -2,6 +2,7 @@
 
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
+use App\Models\Item;
 
 //ホーム画面 第1階層
 Breadcrumbs::for('home.index', function (BreadcrumbTrail $trail) {
@@ -27,11 +28,23 @@ Breadcrumbs::for('home.discussion', function (BreadcrumbTrail $trail) {
 });
 
 //ランキング画面 第n階層
-Breadcrumbs::for('ranking.index', function (BreadcrumbTrail $trail, array $breadcrumbs) {
+Breadcrumbs::for('ranking.index', function (BreadcrumbTrail $trail, ?string $itemId = null) {
+    //項目情報とその項目に紐づく項目情報を全て取得する
+    $item = Item::with(['item'])->find($itemId);
+
+    // パンくずリスト用の配列を生成する
+    $breadcrumbs = [];
+    while (!empty($item)) {
+        isset($item->name) ? $breadcrumbs[] = ['id' => $item->id, 'name' => $item->name] : '';
+        $item = isset($item->item) ? $item->item : '';
+    }
+    $breadcrumbs = array_reverse($breadcrumbs);
+
+    // パンくずリストを生成する
     $trail->parent('home.index');
     $trail->push('ランキング', route('ranking.index'));
-    for ($i = count($breadcrumbs) - 1; 0 <= $i; $i--) {
-        $trail->push($breadcrumbs[$i]['name'], route('ranking.index', "{$breadcrumbs[$i]['id']}"));
+    foreach ($breadcrumbs as $breadcrumb) {
+        $trail->push($breadcrumb['name'], route('ranking.index', "{$breadcrumb['id']}"));
     }
 });
 
