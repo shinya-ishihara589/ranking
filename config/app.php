@@ -186,4 +186,7 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+
+    // 定数を追加する
+    'icon_null_path' => '//ssl.gstatic.com/accounts/ui/avatar_2x.png',
 ];
