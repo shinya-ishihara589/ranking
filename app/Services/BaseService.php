@@ -3,13 +3,10 @@
 namespace App\Services;
 
 use App\Models\Friend;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
 
 class BaseService
 {
-    use HasFactory;
-
     /**
      * 検索ワードを文字列で取得する
      * @param String 検索ワード

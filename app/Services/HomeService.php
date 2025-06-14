@@ -24,11 +24,11 @@ class HomeService extends BaseService
     /**
      * ホーム画面に使用する情報を取得する
      * @param Object $request 検索情報
-     * @return Database $homeData ホーム情報
+     * @return Array $homeData ホーム情報
      */
     public function getHomeData(Request $request): array
     {
-        // 検索条件を取得する
+        // 検索ワードを取得する
         $searchWords = $this->getSearchWordsString($request->words);
 
         // 取得するホーム情報の種類を設定する
@@ -60,6 +60,7 @@ class HomeService extends BaseService
 
         // ホーム画面に使用する情報を取得する
         $homeData = DB::select($sql);
+
         return $homeData;
     }
 

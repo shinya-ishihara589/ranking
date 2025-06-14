@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Search;
+use App\Services\SearchService;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -15,8 +15,8 @@ class SearchController extends Controller
     public function index(Request $request): object
     {
         //検索情報を取得する
-        $searchModel = new Search($request);
-        $searchData = $searchModel->getSearchData();
+        $searchModel = new SearchService;
+        $searchData = $searchModel->getSearchData($request);
 
         return view('search.index', compact(['searchData']));
     }
@@ -30,8 +30,8 @@ class SearchController extends Controller
     public function get(Request $request): array
     {
         //検索の追加情報を取得する
-        $searchModel = new Search($request);
-        $searchData = $searchModel->getSearchData();
+        $searchModel = new SearchService;
+        $searchData = $searchModel->getSearchData($request);
 
         return compact(['searchData', 'request']);
     }
