@@ -23,6 +23,7 @@
     @yield('modals.send-apply')
     @yield('modals.send-comment')
     @yield('modals.edit-profile')
+    @yield('modals.password-reissue')
     @yield('modals.register')
     @yield('modals.tmp-register')
     @yield('modals.overlay')
