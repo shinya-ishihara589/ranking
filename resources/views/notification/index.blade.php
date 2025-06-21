@@ -11,7 +11,7 @@
 @include('commons.nav')
 
 <!-- ヘッダーの呼び出し -->
-@include('notification.header')
+<x-header view_name="notifications.index" />
 
 <!-- 通知 -->
 <table class="table align-middle">

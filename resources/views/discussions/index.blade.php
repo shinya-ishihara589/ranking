@@ -4,14 +4,14 @@
 <!-- Headの呼び出し -->
 @include('commons.head')
 
-<!-- ヘッダーの呼び出し -->
-@include('discussions.header')
-
 <!-- コンテンツの呼び出し -->
 @section('contents')
 
 <!-- ナビゲーションの呼び出し -->
 @include('commons.nav')
+
+<!-- ヘッダーの呼び出し -->
+<x-header view_name="discussions.index" />
 
 <!-- 議論一覧 -->
 <table class="table align-middle">

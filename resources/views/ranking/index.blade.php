@@ -11,7 +11,7 @@
 @include('commons.nav')
 
 <!-- ヘッダーの呼び出し -->
-@include('ranking.header')
+<x-header view_name="ranking.index" />
 
 <!-- タイトル -->
 @if ($itemData)

@@ -11,7 +11,7 @@
 @include('commons.nav')
 
 <!-- ヘッダーの呼び出し -->
-@include('home.header')
+<x-header view_name="home.index" />
 
 <!-- ランキング -->
 <table class="table align-middle">
