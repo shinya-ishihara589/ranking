@@ -13,7 +13,6 @@
         <div style="width: 80%;">
             @yield('header')
             @yield('contents')
-            @yield('footer')
         </div>
         <!-- <div style="width: 20%;">
             @yield('commons.aside')

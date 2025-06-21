@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Str;
 
 class Controller extends BaseController
 {
@@ -28,17 +29,7 @@ class Controller extends BaseController
     protected function getPassword($num): string
     {
         //パスワードを生成する
-        $password = "{Str::random($num)}{$this->getPasswordSymbols()}";
-        $password = substr(str_shuffle($password), 0, $num);
+        $password = Str::random($num);
         return $password;
-    }
-
-    /**
-     * パスワードに使用する記号を取得する
-     * @return String パスワードに使用する記号
-     */
-    private function getPasswordSymbols(): string
-    {
-        return '!"#$%&()-^\@[;:],./=~|`{+*}<>?_' . "'";
     }
 }

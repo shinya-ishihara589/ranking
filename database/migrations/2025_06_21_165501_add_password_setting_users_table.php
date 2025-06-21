@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sessions', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('event', 6);
-            $table->timestamp('datetime');
-            $table->string('ip', 255);
-            $table->string('device', 255);
+        Schema::table('users', function (Blueprint $table) {
+            $table->timestamp('password_set_at')->nullable()->after('password');
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sessions');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('password_set_at');
+        });
     }
 };

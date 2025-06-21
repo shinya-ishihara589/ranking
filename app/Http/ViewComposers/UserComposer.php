@@ -11,7 +11,6 @@ use Illuminate\View\View;
  */
 class UserComposer
 {
-
     /**
      * Bind data to the view.
      * @param View $view
@@ -22,7 +21,7 @@ class UserComposer
         if (!empty(Auth::id())) {
             $view->with([
                 'commons' => [
-                    'user_id' => Auth::user()->user_id,
+                    'user_id' => isset(Auth::user()->user_id) ? Auth::user()->user_id : null,
                     'name' => isset(Auth::user()->profile->name) ? Auth::user()->profile->name : null,
                 ],
             ]);

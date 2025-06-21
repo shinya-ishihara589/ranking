@@ -51,8 +51,8 @@ class RegisterController extends Controller
         $user->password = Hash::make($password);
         $user->created_at = now();
         $user->updated_at = now();
-        $user->created_user = 1;
-        $user->updated_user = 1;
+        $user->created_user = 'RegisterController';
+        $user->updated_user = 'RegisterController';
         $user->save();
 
         //仮アカウント情報を削除する
