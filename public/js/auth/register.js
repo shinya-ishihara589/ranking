@@ -6,7 +6,7 @@ function clickRegisterButton() {
     let registerUserId = $('#register_user_id').val();
 
     //メールアドレスを取得する
-    let registerEmail = $('#register_user_id').val();
+    let registerEmail = $('#register_email').val();
 
     //ワンタイムパスワードを取得する
     let registerOnetimePassword = $('#register_onetime_password').val();
