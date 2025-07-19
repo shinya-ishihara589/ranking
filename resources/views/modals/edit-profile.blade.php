@@ -1,5 +1,5 @@
 @section('modals.edit-profile')
-<div class="modal fade" id="edit-profile-modal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+<div class="modal fade" id="edit-profile-modal" aria-hidden="true" data-bs-backdrop="false" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">

@@ -1,3 +1,5 @@
+<!-- 修正 -->
+@section('modals.add')
 <div>
     <div class="modal" id="tmp-register-modal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered">
@@ -24,3 +26,4 @@
         </div>
     </div>
 </div>
+@endsection

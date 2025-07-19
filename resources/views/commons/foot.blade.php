@@ -1,6 +1,6 @@
 @section('commons.foot')
 <!-- コメントのモーダル画面の呼び出し -->
-@include('modals.send-comment')
+<x-send-comment-modal />
 
 <!-- オーバーレイの呼び出し -->
 @include('modals.overlay')

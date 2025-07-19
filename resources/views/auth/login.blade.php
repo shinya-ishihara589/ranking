@@ -39,7 +39,7 @@
 @include('auth.modals.register')
 
 <!-- ワンタイムパスワード発行のモーダル画面の呼び出し -->
-@include('auth.modals.tmp-register')
+<x-auth.tmp-register-modal />
 
 <!-- フットの呼び出し -->
 @include('commons.foot')

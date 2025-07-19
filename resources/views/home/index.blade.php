@@ -79,6 +79,12 @@
 @include('commons.aside')
 @endsection
 
+<!-- 申請のモーダル画面の呼び出し -->
+@include('modals.search')
+
+<!-- 申請のモーダル画面の呼び出し -->
+@include('modals.change-password')
+
 <!--フットの呼び出し-->
 @include('commons.foot')
 <script src="/js/home/update-table.js"></script>
