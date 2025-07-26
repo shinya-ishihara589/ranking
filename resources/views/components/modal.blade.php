@@ -18,8 +18,8 @@
                 @endforeach
             </form>
             <div class="modal-footer">
-                <button class="btn btn-outline-secondary btn-sm rounded-pill" data-bs-dismiss="modal" onClick="clickCloseButton()">閉じる</button>
-                <button class="btn btn-outline-primary btn-sm rounded-pill" onClick="clickActionButton()">仮登録</button>
+                <button class="btn btn-outline-secondary btn-sm rounded-pill" data-bs-dismiss="modal" onClick="clickCloseButton('{{ $mainCategory['form'] }}')">{{ $closeButton['name'] }}</button>
+                <button class="btn btn-outline-primary btn-sm rounded-pill" onClick="clickActionButton('{{ $actionButton['url'] }}', '{{ $mainCategory['form'] }}', '{{ $mainCategory['id'] }}')">{{ $actionButton['name'] }}</button>
             </div>
         </div>
     </div>

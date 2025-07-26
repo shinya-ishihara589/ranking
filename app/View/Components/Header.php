@@ -13,7 +13,7 @@ class Header extends Component
     /**
      * クラスを初期化する
      * @param String $viewName 画面名
-     * @param Integer $itemId 項目ID
+     * @param Integer ?$itemId 項目ID
      */
     public function __construct(string $viewName, ?int $itemId = null)
     {

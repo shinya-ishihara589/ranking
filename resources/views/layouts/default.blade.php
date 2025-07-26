@@ -25,7 +25,6 @@
     @yield('modals.password-reissue')
     @yield('modals.register')
     @yield('modals.tmp-register')
-    @yield('modals.overlay')
     @yield('modals.search')
     @yield('modals.change-password')
     @yield('commons.foot')
