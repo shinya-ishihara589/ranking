@@ -26,7 +26,6 @@ Route::post('/tmp_register', [App\Http\Controllers\Auth\TmpRegisterController::c
 // パスワード再発行
 Route::post('/password_reset', [App\Http\Controllers\Auth\RegisterController::class, 'register']);    // パスワード再発行
 
-Auth::routes();
 
 // ホーム
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');

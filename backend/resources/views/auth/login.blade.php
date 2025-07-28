@@ -1,47 +1,48 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!-- レイアウトの呼び出し -->
+@extends('layouts.default')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+<!-- ヘッドの呼び出し -->
+@include('commons.head')
 
-        <!-- Email Address -->
+<!-- コンテンツの呼び出し -->
+@section('contents')
+
+<div class="container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); display: flex; justify-content: center;">
+    <div class="card card-container d-flex col-lg-5 p-3">
+        <div class="mb-3">
+            <img src="{{ asset('storage/developer/login_logo.jpg') }}" alt="Logo" width="100%" height="300px" class="d-inline-block align-text-top">
+        </div>
+        <div class="mb-3">
+            {!! Form::open(['method' => 'POST', 'url' => '/login', 'class' => 'form-signin']) !!}
+            <span id="reauth-email" class="reauth-email"></span>
+            {!! Form::email('email', '', ['class' => 'rounded-pill col-lg-2 mb-3 form-control' . ( $errors->has('email') ? ' is-invalid' : '' ), 'placeholder' => 'メールアドレス', 'required', 'autofocus']) !!}
+            {!! Form::password('password', ['class' => 'rounded-pill col-lg-2 mb-3 form-control' . ( $errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'パスワード', 'required']) !!}
+            {!! Form::submit('ログイン', ['class'=>'btn btn-outline-primary rounded-pill col-lg-4']) !!}
+            {!! Form::close() !!}
+        </div>
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <button class="btn btn-outline-danger rounded-pill col-lg-4" data-bs-target="#password-reissue-modal" data-bs-toggle="modal">
+                パスワード再発行
+            </button>
+            <button class="btn btn-outline-success rounded-pill col-lg-4" data-bs-target="#tmp-register-modal" data-bs-toggle="modal">
+                アカウント登録
+            </button>
         </div>
+    </div>
+</div>
+@endsection
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+<!-- パスワード再発行のモーダル画面の呼び出し -->
+@include('auth.modals.password-reissue')
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+<!-- アカウント登録のモーダル画面の呼び出し -->
+@include('auth.modals.register')
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+<!-- ワンタイムパスワード発行のモーダル画面の呼び出し -->
+<x-modals.tmp-register-modal />
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+<!-- フットの呼び出し -->
+@include('commons.foot')
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+<script src="/js/auth/register.js"></script>
+<script src="/js/auth/tmp-register.js"></script>
