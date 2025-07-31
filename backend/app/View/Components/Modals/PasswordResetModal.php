@@ -4,13 +4,8 @@ namespace App\View\Components\Modals;
 
 use App\View\Components\Modals\BaseModal;
 
-class PasswordResetModal extends BaseModal
+final class PasswordResetModal extends BaseModal
 {
-    public $mainCategory;       // メインカテゴリー
-    public $subCategories;      // サブカテゴリー
-    public $closeButton;        // 閉じるボタン
-    public $actionButton;       // アクションボタン
-
     /**
      * クラスを初期化する
      */

@@ -6,15 +6,10 @@ use Illuminate\View\Component;
 
 abstract class BaseModal extends Component
 {
-    protected $mainCategory;    // メインカテゴリー
-    protected $subCategories;   // サブカテゴリー
-    protected $closeButton;     // 閉じるボタン
-    protected $actionButton;    // アクションボタン
-
-    /**
-     * クラスを初期化する
-     */
-    protected function __construct() {}
+    public $mainCategory;       // メインカテゴリー
+    public $subCategories;      // サブカテゴリー
+    public $closeButton;        // 閉じるボタン
+    public $actionButton;       // アクションボタン
 
     /**
      * サブカテゴリ―を単体で設定する

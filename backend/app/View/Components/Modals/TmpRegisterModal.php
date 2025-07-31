@@ -4,13 +4,8 @@ namespace App\View\Components\Modals;
 
 use App\View\Components\Modals\BaseModal;
 
-class TmpRegisterModal extends BaseModal
+final class TmpRegisterModal extends BaseModal
 {
-    public $mainCategory;       // メインカテゴリー
-    public $subCategories;      // サブカテゴリー
-    public $closeButton;        // 閉じるボタン
-    public $actionButton;       // アクションボタン
-
     /**
      * クラスを初期化する
      */

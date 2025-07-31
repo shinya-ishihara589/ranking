@@ -4,13 +4,8 @@ namespace App\View\Components\Modals;
 
 use App\View\Components\Modals\BaseModal;
 
-class SendCommentModal extends BaseModal
+final class SendCommentModal extends BaseModal
 {
-    public $mainCategory;       // メインカテゴリー
-    public $subCategories;      // サブカテゴリー
-    public $closeButton;        // 閉じるボタン
-    public $actionButton;       // アクションボタン
-
     /**
      * クラスを初期化する
      */
