@@ -15,16 +15,16 @@ final class TmpRegisterModal extends BaseModal
         $this->mainCategory = ['title' => 'アカウント仮登録', 'id' => 'tmp-register-modal', 'form' => 'tmp-register-form'];
 
         // サブカテゴリーを単体で設定値を取得する
-        $userId = $this->setSubCategorie('text', 'tmp_register_user_id', 'tmp_register_user_id_error', 'ユーザーID');
-        $password = $this->setSubCategorie('text', 'tmp_register_email', 'tmp_register_email_error', 'パスワード');
+        $tmpUserId = $this->setSubCategorie('text', 'tmp_register_user_id', 'tmp_register_user_id_error', 'ユーザーID');
+        $tmpPassword = $this->setSubCategorie('text', 'tmp_register_email', 'tmp_register_email_error', 'パスワード');
 
         //サブカテゴリ―を結合する
-        $this->subCategories = [$userId, $password];
+        $this->subCategories = [$tmpUserId, $tmpPassword];
 
         // 閉じるボタンを取得する
         $this->closeButton = ['name' => '閉じる'];
 
         // 閉じるボタンを取得する
-        $this->actionButton = ['name' => '仮登録', 'url' => '/login'];
+        $this->actionButton = ['name' => '仮登録', 'url' => '/tmp_register'];
     }
 }

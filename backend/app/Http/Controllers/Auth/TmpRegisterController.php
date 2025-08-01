@@ -12,17 +12,7 @@ use Illuminate\Support\Facades\Mail;
 
 class TmpRegisterController extends Controller
 {
-    use AuthenticatesUsers;
-
     protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * モデルのインスタンスを作成する
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
 
     /**
      * 仮ユーザー登録を行う

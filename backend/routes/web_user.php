@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -8,22 +9,18 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\TmpRegisterController;
 use Illuminate\Support\Facades\Route;
 
-// 認証前
 Route::middleware('guest')->group(function () {
-    // ログイン
-    Route::get('/login', [LoginController::class, 'index'])->name('login');     // ログイン画面
-    Route::post('/login', [LoginController::class, 'login']);                   // ログイン処理
-    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');  // ログアウト処理
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login']);
 
-    // アカウント登録
-    Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);            // アカウント登録処理
-    Route::post('/tmp_register', [App\Http\Controllers\Auth\TmpRegisterController::class, 'tmpRegister']);  // 仮アカウント登録処理
+    Route::post('/tmp_register', [TmpRegisterController::class, 'tmpRegister']);
 
-    // パスワード再発行
-    Route::post('/password_reset', [App\Http\Controllers\Auth\RegisterController::class, 'register']);    // パスワード再発行
+
+    Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('/register', [RegisteredUserController::class, 'store']);
 });
 
 // 認証後
@@ -64,3 +61,6 @@ Route::middleware('auth')->group(function () {
     // コメント
     Route::post('/comments/send/{parent_id?}', [App\Http\Controllers\CommentController::class, 'send']);
 });
+
+
+// Route::get('/login', [LoginController::class, 'login'])->name('login');

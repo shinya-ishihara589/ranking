@@ -13,12 +13,13 @@
             <img src="{{ asset('storage/developer/login_logo.jpg') }}" alt="Logo" width="100%" height="300px" class="d-inline-block align-text-top">
         </div>
         <div class="mb-3">
-            {!! Form::open(['method' => 'POST', 'url' => '/login', 'class' => 'form-signin']) !!}
-            <span id="reauth-email" class="reauth-email"></span>
-            {!! Form::email('email', '', ['class' => 'rounded-pill col-lg-2 mb-3 form-control' . ( $errors->has('email') ? ' is-invalid' : '' ), 'placeholder' => 'メールアドレス', 'required', 'autofocus']) !!}
-            {!! Form::password('password', ['class' => 'rounded-pill col-lg-2 mb-3 form-control' . ( $errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'パスワード', 'required']) !!}
-            {!! Form::submit('ログイン', ['class'=>'btn btn-outline-primary rounded-pill col-lg-4']) !!}
-            {!! Form::close() !!}
+            <form>
+                <form method="POST" url="/login" id="form-signin">
+                    <span id="reauth-email" class="reauth-email"></span>
+                    <input type="email" name="email" value="" class="rounded-pill col-lg-2 mb-3 form-control . {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="メールアドレス" required autofocus>
+                    <input type="password" name="password" value="" class="rounded-pill col-lg-2 mb-3 form-control . {{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="パスワード" required>
+                    <input type="submit" class="btn btn-outline-primary rounded-pill col-lg-4">
+                </form>
         </div>
         <div>
             <button class="btn btn-outline-danger rounded-pill col-lg-4" data-bs-target="#password-reissue-modal" data-bs-toggle="modal">
@@ -33,16 +34,13 @@
 @endsection
 
 <!-- パスワード再発行のモーダル画面の呼び出し -->
-@include('auth.modals.password-reissue')
+<x-modals.password-reissue-modal />
 
 <!-- アカウント登録のモーダル画面の呼び出し -->
-@include('auth.modals.register')
+<x-modals.register-modal />
 
 <!-- ワンタイムパスワード発行のモーダル画面の呼び出し -->
 <x-modals.tmp-register-modal />
 
 <!-- フットの呼び出し -->
 @include('commons.foot')
-
-<script src="/js/auth/register.js"></script>
-<script src="/js/auth/tmp-register.js"></script>

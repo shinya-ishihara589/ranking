@@ -4,7 +4,7 @@ namespace App\View\Components\Modals;
 
 use App\View\Components\Modals\BaseModal;
 
-final class PasswordResetModal extends BaseModal
+final class RegisterModal extends BaseModal
 {
     /**
      * クラスを初期化する
@@ -15,16 +15,17 @@ final class PasswordResetModal extends BaseModal
         $this->mainCategory = ['title' => 'アカウント仮登録', 'id' => 'register-modal', 'form' => 'register-form'];
 
         // サブカテゴリーを単体で設定値を取得する
-        $userId = $this->setSubCategorie('text', 'register_user_id', 'register_user_id_error', 'ユーザーID');
-        $password = $this->setSubCategorie('text', 'register_email', 'register_email_error', 'パスワード');
+        $userId = $this->setSubCategorie('hidden', 'register_user_id', '', '');
+        $password = $this->setSubCategorie('hidden', 'register_email', '', '');
+        $registerOnetimePassword = $this->setSubCategorie('hidden', 'register_onetime_password', '', 'ワンタイムパスワード');
 
         //サブカテゴリ―を結合する
-        $this->subCategories = [$userId, $password];
+        $this->subCategories = [$userId, $password, $registerOnetimePassword];
 
         // 閉じるボタンを取得する
         $this->closeButton = ['name' => '閉じる'];
 
         // アクションボタンを取得する
-        $this->actionButton = ['name' => 'パスワード再発行', 'url' => '/password_reset'];
+        $this->actionButton = ['name' => '登録', 'url' => '/password_reset'];
     }
 }

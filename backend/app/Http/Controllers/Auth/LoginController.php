@@ -24,20 +24,12 @@ class LoginController extends Controller
 
 
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
      * ログイン処理を行う
      * @param Object $request ログイン情報
      * @return Object ホーム画面 又は ログイン画面
      */
-    public function index(): object
+    public function showLoginForm(): object
     {
-        dd(1);
         return view('auth.login');
     }
 

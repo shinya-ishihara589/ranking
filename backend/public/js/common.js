@@ -18,7 +18,7 @@ function showErrorMeaage(error) {
     // エラーメッセージを表示する
     for (var key in error.responseJSON.errors) {
         var message = `<strong class="error-message">${error.responseJSON.errors[key][0]}</strong>`;
-        $(`#${key}_error`).append(message)
+        $(`#${key}_error`).append(message);
         $(`#${key}`).addClass('is-invalid');
     }
 }
@@ -83,7 +83,7 @@ function clickActionButton(url, formId, modalId) {
     const dataObject = {};
     formData.forEach(item => {
         dataObject[item.name] = item.value;
-    })
+    });
 
     // 項目登録を実行する
     $.ajax({

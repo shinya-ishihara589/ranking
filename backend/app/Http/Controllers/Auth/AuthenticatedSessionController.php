@@ -11,11 +11,13 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
+    protected $redirectTo = '/home';
     /**
      * Display the login view.
      */
     public function create(): View
     {
+        dd(1);
         return view('auth.login');
     }
 
