@@ -18,7 +18,7 @@ final class PasswordResetModal extends BaseModal
         $userId = $this->setSubCategorie('text', 'register_user_id', 'register_user_id_error', 'ユーザーID');
         $password = $this->setSubCategorie('text', 'register_email', 'register_email_error', 'パスワード');
 
-        //サブカテゴリ―を結合する
+        // サブカテゴリ―を結合する
         $this->subCategories = [$userId, $password];
 
         // 閉じるボタンを取得する

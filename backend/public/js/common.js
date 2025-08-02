@@ -99,6 +99,21 @@ function clickActionButton(url, formId, modalId) {
 
         // モーダル画面を非表示にする
         $(`#${modalId}`).modal('hide');
+
+        // 
+        if (url == '/tmp_register') {
+            //ユーザーIDを取得する
+            $('#register_user_id').val(tmpRegisterUserId);
+
+            //メールアドレスを取得する
+            $('#register_email').val(tmpRegisterEmail);
+
+            //入力欄を初期化する
+            resetInput('tmp-register-form');
+
+            //モーダル画面を表示する
+            $('#register-modal').modal('show');
+        }
     }).fail(function (error) {
         // 入力欄のエラーメッセージを非表示にする
         hideErrorMeaage();

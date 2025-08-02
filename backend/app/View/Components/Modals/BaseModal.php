@@ -19,7 +19,7 @@ abstract class BaseModal extends Component
      * @param String プレイスフォルダー
      * @return Array サブカテゴリーの単体
      */
-    protected function setSubCategorie(string $type, string $name, string $error, string $placeholder)
+    protected function setSubCategorie(string $type, string $name, string $error, string $placeholder): array
     {
         return ['type' => $type, 'name' => $name, 'error' => $error, 'placeholder' => $placeholder];
     }
@@ -27,7 +27,7 @@ abstract class BaseModal extends Component
     /**
      * コンポーネントを呼び出す
      */
-    public function render()
+    public function render(): object
     {
         return view('components.modal');
     }

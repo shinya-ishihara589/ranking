@@ -4,6 +4,9 @@ namespace App\View\Components\Modals;
 
 use App\View\Components\Modals\BaseModal;
 
+/**
+ * アカウント仮登録
+ */
 final class TmpRegisterModal extends BaseModal
 {
     /**
@@ -16,10 +19,10 @@ final class TmpRegisterModal extends BaseModal
 
         // サブカテゴリーを単体で設定値を取得する
         $tmpUserId = $this->setSubCategorie('text', 'tmp_register_user_id', 'tmp_register_user_id_error', 'ユーザーID');
-        $tmpPassword = $this->setSubCategorie('text', 'tmp_register_email', 'tmp_register_email_error', 'パスワード');
+        $email = $this->setSubCategorie('text', 'tmp_register_email', 'tmp_register_email_error', 'メールアドレス');
 
-        //サブカテゴリ―を結合する
-        $this->subCategories = [$tmpUserId, $tmpPassword];
+        // サブカテゴリ―を結合する
+        $this->subCategories = [$tmpUserId, $email];
 
         // 閉じるボタンを取得する
         $this->closeButton = ['name' => '閉じる'];
