@@ -100,13 +100,13 @@ function clickActionButton(url, formId, modalId) {
         // モーダル画面を非表示にする
         $(`#${modalId}`).modal('hide');
 
-        // 
+        // 仮アカウント登録の場合はアカウント登録を表示する
         if (url == '/tmp_register') {
             //ユーザーIDを取得する
-            $('#register_user_id').val(tmpRegisterUserId);
+            $('#register_user_id').val(dataObject.tmp_register_user_id);
 
             //メールアドレスを取得する
-            $('#register_email').val(tmpRegisterEmail);
+            $('#register_email').val(dataObject.tmp_register_email);
 
             //入力欄を初期化する
             resetInput('tmp-register-form');
@@ -120,6 +120,7 @@ function clickActionButton(url, formId, modalId) {
 
         // 入力欄のエラーメッセージを表示する
         showErrorMeaage(error);
+        console.log(error);
     }).always(function () {
         // オーバーレイをOFFにする
         offOverlay();

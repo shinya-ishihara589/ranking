@@ -14,17 +14,7 @@ use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
-    use AuthenticatesUsers;
-
     protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * モデルのインスタンスを作成する
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
 
     /**
      * ユーザー登録を行う

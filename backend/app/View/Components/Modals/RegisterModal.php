@@ -20,7 +20,7 @@ final class RegisterModal extends BaseModal
         // サブカテゴリーを単体で設定値を取得する
         $userId = $this->setSubCategorie('hidden', 'register_user_id', '', '');
         $email = $this->setSubCategorie('hidden', 'register_email', '', '');
-        $registerOnetimePassword = $this->setSubCategorie('text', 'register_onetime_password', '', 'ワンタイムパスワード');
+        $registerOnetimePassword = $this->setSubCategorie('text', 'register_onetime_password', 'register_onetime_password_error', 'ワンタイムパスワード');
 
         // サブカテゴリ―を結合する
         $this->subCategories = [$userId, $email, $registerOnetimePassword];

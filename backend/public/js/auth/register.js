@@ -38,6 +38,8 @@ function clickRegisterButton() {
 
         //入力欄のエラーメッセージを表示する
         showErrorMeaage(error);
+
+        console.log(error);
     }).always(function () {
         //オーバーレイをOFFにする
         offOverlay();

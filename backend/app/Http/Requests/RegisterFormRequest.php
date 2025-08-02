@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use App\Rules\CheckOnetimePassword;
 use App\Rules\CheckValidityPeriodOnetimePassword;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class RegisterFormRequest extends FormRequest
 {

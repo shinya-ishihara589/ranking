@@ -34,7 +34,7 @@
 @endsection
 
 <!-- パスワード再発行のモーダル画面の呼び出し -->
-<x-modals.password-reissue-modal />
+<x-modals.reissue-password-modal />
 
 <!-- アカウント登録のモーダル画面の呼び出し -->
 <x-modals.register-modal />
