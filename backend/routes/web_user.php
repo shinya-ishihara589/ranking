@@ -1,22 +1,16 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\ConfirmablePasswordController;
-use App\Http\Controllers\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\Auth\EmailVerificationPromptController;
-use App\Http\Controllers\Auth\NewPasswordController;
-use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\TmpRegisterController;
 use Illuminate\Support\Facades\Route;
 
+// 認証前
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [LoginController::class, 'login']);
-    Route::post('/tmp_register', [TmpRegisterController::class, 'tmpRegister']);
-    Route::post('/register', [RegisterController::class, 'register']);
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login'); // ログイン画面
+    Route::post('/login', [LoginController::class, 'login']);                       // ログイン処理
+    Route::post('/tmp_register', [TmpRegisterController::class, 'tmpRegister']);    // 仮登録処理
+    Route::post('/register', [RegisterController::class, 'register']);              // 登録処理
 });
 
 // 認証後
@@ -57,6 +51,3 @@ Route::middleware('auth')->group(function () {
     // コメント
     Route::post('/comments/send/{parent_id?}', [App\Http\Controllers\CommentController::class, 'send']);
 });
-
-
-// Route::get('/login', [LoginController::class, 'login'])->name('login');

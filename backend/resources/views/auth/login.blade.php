@@ -6,20 +6,19 @@
 
 <!-- コンテンツの呼び出し -->
 @section('contents')
-
 <div class="container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); display: flex; justify-content: center;">
     <div class="card card-container d-flex col-lg-5 p-3">
         <div class="mb-3">
             <img src="{{ asset('storage/developer/login_logo.jpg') }}" alt="Logo" width="100%" height="300px" class="d-inline-block align-text-top">
         </div>
         <div class="mb-3">
-            <form>
-                <form method="POST" url="/login" id="form-signin">
-                    <span id="reauth-email" class="reauth-email"></span>
-                    <input type="email" name="email" value="" class="rounded-pill col-lg-2 mb-3 form-control . {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="メールアドレス" required autofocus>
-                    <input type="password" name="password" value="" class="rounded-pill col-lg-2 mb-3 form-control . {{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="パスワード" required>
-                    <input type="submit" class="btn btn-outline-primary rounded-pill col-lg-4">
-                </form>
+            <form method="POST" url="/login" id="form-signin">
+                @csrf
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="email" name="email" value="" class="rounded-pill col-lg-2 mb-3 form-control . {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="メールアドレス" required autofocus>
+                <input type="password" name="password" value="" class="rounded-pill col-lg-2 mb-3 form-control . {{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="パスワード" required>
+                <input type="submit" value="ログイン" class="btn btn-outline-primary rounded-pill col-lg-4">
+            </form>
         </div>
         <div>
             <button class="btn btn-outline-danger rounded-pill col-lg-4" data-bs-target="#password-reissue-modal" data-bs-toggle="modal">
