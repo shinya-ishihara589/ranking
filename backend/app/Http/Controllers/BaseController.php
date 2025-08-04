@@ -16,25 +16,6 @@ abstract class BaseController extends Controller
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    private $event;
-
-    function __construct(Request $request)
-    {
-        $action = Route::current()->getAction();
-        $controller = $action['controller'] ?? null;
-
-        if ($controller) {
-            list($controllerName, $methodName) = explode('@', $controller);
-            $controllerName = class_basename($controllerName);
-
-            $this->event = [
-                'controller' => $controllerName,
-                'method' => $methodName,
-            ];
-        }
-        $this->storeSessionLog($request);
-    }
-
     /**
      * パスワードを生成する
      * @param Integer パスワードの文字数
@@ -48,10 +29,10 @@ abstract class BaseController extends Controller
     }
 
     /**
-     * セッション処理を記録する
+     * ログを記録する
      * @param Object $request リクエスト情報
      */
-    private function storeSessionLog(Request $request): void
+    protected function storeSessionLog(Request $request, string $event): void
     {
         // デバイス情報を取得する
         $agent = new Agent;
@@ -73,7 +54,7 @@ abstract class BaseController extends Controller
         // セッション情報を登録する
         $session = new Session;
         $session->user_id = Auth::id();
-        $session->event = $this->event['controller'] . ':' . $this->event['method'];
+        $session->event = $event;
         $session->ip = $request->ip();
         $session->device = $deviceInfoString;
         $session->save();
