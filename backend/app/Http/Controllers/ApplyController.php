@@ -6,7 +6,7 @@ use App\Models\Apply;
 use App\Http\Requests\ApplyFormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class ApplyController extends Controller
+class ApplyController extends BaseController
 {
     /**
      * 項目情報を追加する

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\HomeService;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     /**
      * ホーム画面に遷移する

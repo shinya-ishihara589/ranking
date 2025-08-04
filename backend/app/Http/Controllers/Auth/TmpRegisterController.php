@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\TmpRegisterFormRequest;
 use App\Mail\SendTmpRegisterMail;
 use App\Models\TmpUser;
@@ -10,7 +10,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Mail;
 
-class TmpRegisterController extends Controller
+class TmpRegisterController extends BaseController
 {
     protected $redirectTo = RouteServiceProvider::HOME;
 

@@ -7,7 +7,7 @@ use App\Models\Ranking;
 use App\Http\Requests\ItemFormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class ItemController extends Controller
+class ItemController extends BaseController
 {
     /**
      * 項目を追加する

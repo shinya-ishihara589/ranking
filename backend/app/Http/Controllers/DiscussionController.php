@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Discussion;
 use Illuminate\Http\Request;
 
-class DiscussionController extends Controller
+class DiscussionController extends BaseController
 {
     /**
      * 議論画面に遷移する

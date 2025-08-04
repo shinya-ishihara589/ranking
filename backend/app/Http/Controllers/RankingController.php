@@ -9,7 +9,7 @@ use App\Models\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RankingController extends Controller
+class RankingController extends BaseController
 {
     /**
      * ランキング画面に遷移する

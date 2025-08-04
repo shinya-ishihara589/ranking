@@ -6,14 +6,34 @@ use App\Models\Session;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Jenssegers\Agent\Agent;
 
-abstract class Controller extends BaseController
+abstract class BaseController extends Controller
 {
     use AuthorizesRequests, ValidatesRequests;
+
+    private $event;
+
+    function __construct(Request $request)
+    {
+        $action = Route::current()->getAction();
+        $controller = $action['controller'] ?? null;
+
+        if ($controller) {
+            list($controllerName, $methodName) = explode('@', $controller);
+            $controllerName = class_basename($controllerName);
+
+            $this->event = [
+                'controller' => $controllerName,
+                'method' => $methodName,
+            ];
+        }
+        $this->storeSessionLog($request);
+    }
 
     /**
      * パスワードを生成する
@@ -30,9 +50,8 @@ abstract class Controller extends BaseController
     /**
      * セッション処理を記録する
      * @param Object $request リクエスト情報
-     * @param String $event イベント情報
      */
-    private function storeSessionLog(Request $request, string $event): void
+    private function storeSessionLog(Request $request): void
     {
         // デバイス情報を取得する
         $agent = new Agent;
@@ -54,7 +73,7 @@ abstract class Controller extends BaseController
         // セッション情報を登録する
         $session = new Session;
         $session->user_id = Auth::id();
-        $session->event = $event;
+        $session->event = $this->event['controller'] . ':' . $this->event['method'];
         $session->ip = $request->ip();
         $session->device = $deviceInfoString;
         $session->save();

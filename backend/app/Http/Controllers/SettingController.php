@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class SettingController extends Controller
+class SettingController extends BaseController
 {
     /**
      * ユーザー画面に遷移する

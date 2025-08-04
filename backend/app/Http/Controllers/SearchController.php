@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\SearchService;
 use Illuminate\Http\Request;
 
-class SearchController extends Controller
+class SearchController extends BaseController
 {
     /**
      * 検索画面に遷移する

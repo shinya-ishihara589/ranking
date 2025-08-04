@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 
-class NotificationController extends Controller
+class NotificationController extends BaseController
 {
     /**
      * 通知画面に遷移する

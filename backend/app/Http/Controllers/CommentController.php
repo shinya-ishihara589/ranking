@@ -6,7 +6,7 @@ use App\Models\Comment;
 use App\Http\Requests\CommentFormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class CommentController extends Controller
+class CommentController extends BaseController
 {
     /**
      * コメント情報を追加する
