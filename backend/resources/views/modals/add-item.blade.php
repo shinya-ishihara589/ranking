@@ -8,17 +8,7 @@
             </div>
             <div class="modal-body">
                 <div>
-                    {!! Form::text('name', '', ['id' => 'name', 'class' => 'form-control input-field', 'placeholder' => '名前']) !!}
-                    <span class="invalid-feedback" id='name_error' role="alert"></span>
-                </div>
-            </div>
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="add-item-modal-label">パスワード確認</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div>
-                    {!! Form::text('name', '', ['id' => 'name', 'class' => 'form-control input-field', 'placeholder' => 'パスワード確認']) !!}
+                    {!! Form::text('name', '', ['id' => 'name', 'class' => 'form-control input-field', 'placeholder' => '項目名']) !!}
                     <span class="invalid-feedback" id='name_error' role="alert"></span>
                 </div>
             </div>

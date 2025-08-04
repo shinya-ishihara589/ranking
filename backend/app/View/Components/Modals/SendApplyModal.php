@@ -1,0 +1,33 @@
+<?php
+
+namespace App\View\Components\Modals;
+
+use App\View\Components\Modals\BaseModal;
+
+/**
+ * 申請送信
+ */
+final class SendApplyModal extends BaseModal
+{
+    /**
+     * クラスを初期化する
+     */
+    public function __construct()
+    {
+        // メインカテゴリーの設定を行う
+        $this->mainCategory = ['title' => 'アカウント仮登録', 'id' => 'tmp-register-modal', 'form' => 'tmp-register-form'];
+
+        // サブカテゴリーを単体で設定値を取得する
+        $tmpUserId = $this->setSubCategorie('text', 'tmp_register_user_id', 'tmp_register_user_id_error', 'ユーザーID');
+        $email = $this->setSubCategorie('text', 'tmp_register_email', 'tmp_register_email_error', 'メールアドレス');
+
+        // サブカテゴリ―を結合する
+        $this->subCategories = [$tmpUserId, $email];
+
+        // 閉じるボタンを取得する
+        $this->closeButton = ['name' => '閉じる'];
+
+        // 閉じるボタンを取得する
+        $this->actionButton = ['name' => '仮登録', 'url' => '/tmp_register'];
+    }
+}

@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\TmpRegisterController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
+
 // 認証前
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login'); // ログイン画面
@@ -19,14 +21,14 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout'); // ログイン画面
     // ホーム
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
-    Route::post('/', [App\Http\Controllers\HomeController::class, 'get']);
+    Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    Route::post('/', [HomeController::class, 'get']);
 
     // ランキング
     Route::get('/ranking/{itemId?}', [App\Http\Controllers\RankingController::class, 'index'])->name('ranking.index');
     Route::post('/ranking/{itemId?}', [App\Http\Controllers\RankingController::class, 'get']);
     Route::post('/ranking/vote/{voteId?}', [App\Http\Controllers\RankingController::class, 'vote']);
-    Route::post('/item/add/{itemId?}', [App\Http\Controllers\ItemController::class, 'store']);
+    Route::PUT('/item/{itemId?}', [App\Http\Controllers\ItemController::class, 'store']);
     Route::post('/apply/send', [App\Http\Controllers\ApplyController::class, 'send']);
 
     // 検索

@@ -88,11 +88,13 @@
         </button>
     </div>
     <div class="mt-3 d-flex">
-        {!! Form::text('words', '', ['class' => 'form-control me-1 rounded-pill', 'id' => 'ranking-words', 'placeholder' => '検索ワード']) !!}
-        {!! Form::hidden('mode', 'all', ['id' => 'ranking-mode']) !!}
-        {!! Form::hidden('item_id', $itemId, ['id' => 'ranking-item-id']) !!}
-        {!! Form::button('リセット', ['class'=>'btn btn-outline-secondary rounded-pill me-1 col-lg-1', 'onClick' => 'clickResetButtonRanking()']) !!}
-        {!! Form::button('検索', ['class'=>'btn btn-outline-primary rounded-pill col-lg-1', 'onClick' => 'clickSearchButtonRanking()']) !!}
+        <?php
+        // {!! Form::text('words', '', ['class' => 'form-control me-1 rounded-pill', 'id' => 'ranking-words', 'placeholder' => '検索ワード']) !!}
+        // {!! Form::hidden('mode', 'all', ['id' => 'ranking-mode']) !!}
+        // {!! Form::hidden('item_id', $itemId, ['id' => 'ranking-item-id']) !!}
+        // {!! Form::button('リセット', ['class'=>'btn btn-outline-secondary rounded-pill me-1 col-lg-1', 'onClick' => 'clickResetButtonRanking()']) !!}
+        // {!! Form::button('検索', ['class'=>'btn btn-outline-primary rounded-pill col-lg-1', 'onClick' => 'clickSearchButtonRanking()']) !!}
+        ?>
     </div>
 </footer>
 
@@ -101,10 +103,11 @@
 @endsection
 
 <!-- 項目追加のモーダル画面の呼び出し -->
-@include('modals.add-item')
+<x-modals.add-item-modal :id="$id ?? null" />
 
 <!-- 申請のモーダル画面の呼び出し -->
-@include('modals.send-apply')
+<?php //@include('modals.add-item') 
+?>
 
 <!-- フットの呼び出し -->
 @include('commons.foot')
