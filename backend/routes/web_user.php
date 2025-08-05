@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/ranking/{itemId?}', [App\Http\Controllers\RankingController::class, 'index'])->name('ranking.index');
     Route::post('/ranking/{itemId?}', [App\Http\Controllers\RankingController::class, 'get']);
     Route::post('/ranking/vote/{voteId?}', [App\Http\Controllers\RankingController::class, 'vote']);
-    Route::PUT('/item/{itemId?}', [App\Http\Controllers\ItemController::class, 'store']);
+    Route::POST('/item/{itemId?}', [App\Http\Controllers\ItemController::class, 'store']);
     Route::post('/apply/send', [App\Http\Controllers\ApplyController::class, 'send']);
 
     // 検索

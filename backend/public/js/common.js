@@ -15,6 +15,7 @@ function clickCloseButton(formId) {
  * @param {Array} formId エラーメッセージ
  */
 function showErrorMeaage(error) {
+    console.log(error);
     // エラーメッセージを表示する
     for (var key in error.responseJSON.errors) {
         var message = `<strong class="error-message">${error.responseJSON.errors[key][0]}</strong>`;
@@ -120,7 +121,6 @@ function clickActionButton(url, formId, modalId) {
 
         // 入力欄のエラーメッセージを表示する
         showErrorMeaage(error);
-        console.log(error);
     }).always(function () {
         // オーバーレイをOFFにする
         offOverlay();

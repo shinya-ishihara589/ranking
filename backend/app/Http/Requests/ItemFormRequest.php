@@ -23,10 +23,10 @@ class ItemFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
+            'add_item_name' => [
                 'required',
                 'max:50',
-                Rule::unique('items')->where('item_id', $this->itemId)->where('name', $this->name),
+                Rule::unique('items', 'name')->where('item_id', $this->itemId)->where('name', $this->add_item_name),
             ],
         ];
     }

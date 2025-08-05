@@ -15,7 +15,7 @@ class ItemController extends BaseController
      * @param Integer 項目ID
      * @return Array ランキング情報
      */
-    public function store(ItemFormRequest $request, int $itemId = null): array
+    public function store(ItemFormRequest $request, ?int $itemId = null): array
     {
         //ユーザーIDの取得する
         $userId = Auth::id();
@@ -24,7 +24,7 @@ class ItemController extends BaseController
         $item = new Item;
         $item->item_id = $itemId;
         $item->user_id = $userId;
-        $item->name = $request->name;
+        $item->name = $request->add_item_name;
         $item->ip = $request->ip();
         $item->save();
 

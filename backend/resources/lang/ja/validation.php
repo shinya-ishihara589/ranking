@@ -155,7 +155,7 @@ return [
         'banner' => 'バナー',
         'icon' => 'アイコン',
 
-        'item' => '項目',
+        'add_item_name' => '項目名',
 
         'send_comment_comment' => 'コメント',
 
