@@ -2,59 +2,92 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
+use App\Http\Requests\ProfileFormRequest;
 
 class ProfileController extends BaseController
 {
     /**
-     * Display the user's profile form.
+     * プロフィール画面に遷移する
+     * @param String ユーザーID
+     * @return Object プロフィール情報
      */
-    public function edit(Request $request): View
+    public function index(string $userId): object
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        //ユーザーを取得する
+        $userData = User::with(['profile'])->where('user_id', $userId)->first();
+
+        //プロフィール情報を取得する
+        $profileModel = new Profile;
+        $profileData = $profileModel->getProfileData($userData->id);
+
+        return view('profile.index', compact(['userData', 'profileData']));
     }
 
     /**
-     * Update the user's profile information.
+     * プロフィール画面に遷移する
+     * @param Object プロフィール情報
+     * @return Array プロフィール情報
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileFormRequest $request): array
     {
-        $request->user()->fill($request->validated());
+        //ファイル情報を取得する
+        $bannerFile = $request->file('banner_file');
+        $iconFile = $request->file('icon_file');
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        //ユーザーIDを取得する
+        $authUser = Auth::user();
+
+        //プロフィールを取得する
+        $profileData = Profile::find($authUser->id);
+
+        //プロフィールを更新する
+        $profileData->name = $request->edit_profile_name;
+        $profileData->self_introduction = $request->edit_profile_self_introduction;
+
+        //バナーファイルを保存する
+        if ($bannerFile) {
+            $uniqId = uniqid();
+            $beforeBannerPath = $profileData->banner_path;
+            $afterBannerPath = "{$uniqId}.jpg";
+            Storage::putFileAs("/public/users/{$authUser->user_id}/", $bannerFile, $afterBannerPath);
+            Storage::delete("/public/users/{$authUser->user_id}/{$beforeBannerPath}");
+            $profileData->banner_path = $afterBannerPath;
         }
 
-        $request->user()->save();
+        //アイコンファイルを保存する
+        if ($iconFile) {
+            $uniqId = uniqid();
+            $beforeIconPath = $profileData->icon_path;
+            $afterIconPath = "{$uniqId}.jpg";
+            Storage::putFileAs("/public/users/{$authUser->user_id}/", $iconFile, $afterIconPath);
+            Storage::delete("/public/users/{$authUser->user_id}/{$beforeIconPath}");
+            $profileData->icon_path = $afterIconPath;
+        }
+        $profileData->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return compact(['profileData']);
     }
 
     /**
-     * Delete the user's account.
+     * プロフィールの追加情報を取得する
+     * @param Object プロフィール取得情報
+     * @param String ユーザーID
+     * @return Array プロフィールの追加情報
      */
-    public function destroy(Request $request): RedirectResponse
+    public function get(Request $request, string $userId): array
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
+        //ユーザーを取得する
+        $userData = User::with(['profile'])->where('user_id', $userId)->first();
 
-        $user = $request->user();
+        //プロフィールの追加情報を取得する
+        $profileModel = new Profile;
+        $profileData = $profileModel->getProfileData($userData->id, $request->offset);
 
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        return compact(['profileData']);
     }
 }
