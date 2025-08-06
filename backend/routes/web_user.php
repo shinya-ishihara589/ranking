@@ -44,9 +44,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/discussions/{discussionId}', [App\Http\Controllers\DiscussionController::class, 'detail'])->name('discussions.detail');
 
     // プロフィール
-    Route::get('/profile/{userId}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/{userId}', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::post('/profile/{userId}', [App\Http\Controllers\ProfileController::class, 'get']);
-    Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'update']);
+    Route::put('/profile/{userId}', [App\Http\Controllers\ProfileController::class, 'update']);
     Route::get('/friends/{userId}', [App\Http\Controllers\FriendController::class, 'index']);
 
     // 設定

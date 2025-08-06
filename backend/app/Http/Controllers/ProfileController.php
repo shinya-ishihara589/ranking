@@ -16,7 +16,7 @@ class ProfileController extends BaseController
      * @param String ユーザーID
      * @return Object プロフィール情報
      */
-    public function index(string $userId): object
+    public function show(string $userId): object
     {
         //ユーザーを取得する
         $userData = User::with(['profile'])->where('user_id', $userId)->first();

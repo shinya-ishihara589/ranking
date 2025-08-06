@@ -81,7 +81,7 @@
 
 <!-- プロフィール変更のモーダル画面の呼び出し -->
 @if ($commons['user_id'] == $userData->user_id)
-@include('modals.edit-profile')
+<x-modals.edit-profile-modal :userId="$userData->id" />
 @endif
 
 <!-- フットの呼び出し -->

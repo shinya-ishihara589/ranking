@@ -16,7 +16,7 @@ class BaseModel extends Model
      * @param String 検索ワード
      * @return String 検索ワード
      */
-    protected function getSearchWordsString(string $words = null): string
+    protected function getSearchWordsString(?string $words = null): string
     {
         //全角スペースを半角スペースに置換する
         $words = str_replace([' ', '　'], ' ', $words);
@@ -44,7 +44,7 @@ class BaseModel extends Model
      * @param String 検索ワード
      * @return Array 検索ワード
      */
-    protected function getSearchWordsArray(string $words = null): array
+    protected function getSearchWordsArray(?string $words = null): array
     {
         //あいまい検索用のワードを生成する
         $searchWords = [];
@@ -101,7 +101,7 @@ class BaseModel extends Model
      * @param Integer 取得上限数
      * @return Integer 取得上限数
      */
-    protected function getSearchLimit(int $limit = null): int
+    protected function getSearchLimit(?int $limit = null): int
     {
         //取得上限数を初期化する
         $searchLimit = 0;
