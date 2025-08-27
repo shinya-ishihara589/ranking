@@ -33,14 +33,17 @@ class ProfileController extends BaseController
      * @param Object プロフィール情報
      * @return Array プロフィール情報
      */
-    public function update(ProfileFormRequest $request): array
+    public function update(ProfileFormRequest $request, int $userId): array
     {
         //ファイル情報を取得する
         $bannerFile = $request->file('banner_file');
         $iconFile = $request->file('icon_file');
 
         //ユーザーIDを取得する
-        $authUser = Auth::user();
+        return $authUser = Auth::user();
+
+        dd($authUser);
+
 
         //プロフィールを取得する
         $profileData = Profile::find($authUser->id);

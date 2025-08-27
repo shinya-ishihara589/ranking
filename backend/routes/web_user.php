@@ -4,6 +4,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\TmpRegisterController;
+use App\Http\Controllers\RankingController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ApplyController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
@@ -25,11 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/', [HomeController::class, 'get']);
 
     // ランキング
-    Route::get('/ranking/{itemId?}', [App\Http\Controllers\RankingController::class, 'index'])->name('ranking.index');
-    Route::post('/ranking/{itemId?}', [App\Http\Controllers\RankingController::class, 'get']);
-    Route::post('/ranking/vote/{voteId?}', [App\Http\Controllers\RankingController::class, 'vote']);
-    Route::POST('/item/{itemId?}', [App\Http\Controllers\ItemController::class, 'store']);
-    Route::post('/apply/send', [App\Http\Controllers\ApplyController::class, 'send']);
+    Route::get('/ranking/{itemId?}', [RankingController::class, 'index'])->name('ranking.index');
+    Route::post('/ranking/{itemId?}', [RankingController::class, 'get']);
+    Route::post('/ranking/vote/{voteId?}', [RankingController::class, 'vote']);
+    Route::post('/item/{itemId?}', [ItemController::class, 'store']);
+    Route::post('/apply/send', [ApplyController::class, 'send']);
 
     // 検索
     Route::get('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('search.index');
@@ -46,7 +49,7 @@ Route::middleware('auth')->group(function () {
     // プロフィール
     Route::get('/profile/{userId}', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::post('/profile/{userId}', [App\Http\Controllers\ProfileController::class, 'get']);
-    Route::put('/profile/{userId}', [App\Http\Controllers\ProfileController::class, 'update']);
+    Route::post('/profile/{userId}', [App\Http\Controllers\ProfileController::class, 'update']);
     Route::get('/friends/{userId}', [App\Http\Controllers\FriendController::class, 'index']);
 
     // 設定

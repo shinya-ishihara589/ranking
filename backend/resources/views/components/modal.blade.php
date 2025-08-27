@@ -9,7 +9,7 @@
                 @foreach ($subCategories as $subCategory)
                 <div class="mb-3">
                     @if ($subCategory['type'] == 'textarea')
-                    <textarea type="{{ $subCategory['type'] }}" name="{{ $subCategory['name'] }}" id="{{ $subCategory['name'] }}" placeholder="{{ $subCategory['placeholder'] }}" class="form-control input-field"></textarea>
+                    <textarea type="{{ $subCategory['type'] }}" name="{{ $subCategory['name'] }}" id="{{ $subCategory['name'] }}" placeholder="{{ $subCategory['placeholder'] }}" class="form-control input-field" rows="7"></textarea>
                     @else
                     <input type="{{ $subCategory['type'] }}" name="{{ $subCategory['name'] }}" id="{{ $subCategory['name'] }}" placeholder="{{ $subCategory['placeholder'] }}" class="form-control input-field">
                     @endif
