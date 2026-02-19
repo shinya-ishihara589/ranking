@@ -9,7 +9,7 @@
             @endif
         </div>
         <div>
-            @if ($search_state != '0')
+            @if ($search_state !== '0')
             <button type="button" class="btn btn-outline-primary btn-sm rounded-pill" data-bs-target="#search-modal" data-bs-toggle="modal" data-serach-state="{{ $search_state }}">検索</button>
             @endif
         </div>

@@ -87,4 +87,3 @@
 
 <!--フットの呼び出し-->
 @include('commons.foot')
-<script src="/js/home/update-table.js"></script>

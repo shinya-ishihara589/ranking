@@ -1,10 +1,12 @@
-<!-- レイアウトの呼び出し -->
+{{-- レイアウトの呼び出し --}}
 @extends('layouts.default')
 
-<!-- ヘッドの呼び出し -->
+{{-- ヘッドの呼び出し --}}
+@section('commons.head')
 @include('commons.head')
+@endsection
 
-<!-- コンテンツの呼び出し -->
+{{-- コンテンツの呼び出し --}}
 @section('contents')
 <div class="container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); display: flex; justify-content: center;">
     <div class="card card-container d-flex col-lg-5 p-3">
@@ -30,16 +32,18 @@
         </div>
     </div>
 </div>
-@endsection
 
-<!-- パスワード再発行のモーダル画面の呼び出し -->
+{{-- パスワード再発行のモーダル画面の呼び出し --}}
 <x-modals.reissue-password-modal />
 
-<!-- アカウント登録のモーダル画面の呼び出し -->
+{{-- アカウント登録のモーダル画面の呼び出し --}}
 <x-modals.register-modal />
 
-<!-- ワンタイムパスワード発行のモーダル画面の呼び出し -->
+{{-- ワンタイムパスワード発行のモーダル画面の呼び出し --}}
 <x-modals.tmp-register-modal />
+@endsection
 
-<!-- フットの呼び出し -->
+{{-- フットの呼び出し --}}
+@section('commons.foot')
 @include('commons.foot')
+@endsection

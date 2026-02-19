@@ -1,19 +1,21 @@
-<!-- レイアウトの呼び出し -->
+{{-- レイアウトの呼び出し --}}
 @extends('layouts.default')
 
-<!-- ヘッドの呼び出し -->
+{{-- ヘッドの呼び出し --}}
+@section('commons.head')
 @include('commons.head')
+@endsection
 
-<!-- コンテンツの呼び出し -->
+{{-- コンテンツの呼び出し --}}
 @section('contents')
 
-<!-- ナビゲーションの呼び出し -->
+{{-- ナビゲーションの呼び出し --}}
 @include('commons.nav')
 
-<!-- ヘッダーの呼び出し -->
+{{-- ヘッダーの呼び出し --}}
 <x-header view_name="ranking.index" :item_id="$itemId" />
 
-<!-- タイトル -->
+{{-- タイトル --}}
 @if ($itemData)
 <table class="table align-middle">
     <thead class="fs-4 fw-bold">
@@ -98,21 +100,19 @@
     </div>
 </footer>
 
-<!-- アサイドの呼び出し -->
+{{-- アサイドの呼び出し --}}
 @include('commons.aside')
-@endsection
 
-<!-- 項目追加のモーダル画面の呼び出し -->
-<x-modals.add-item-modal :id="$id ?? null" />
+{{-- 項目追加のモーダル画面の呼び出し --}}
+<x-modals.add-item-modal :itemId="$itemId ?? null" />
 
-<!-- 申請のモーダル画面の呼び出し -->
-<?php //@include('modals.add-item') 
-?>
-
-<!-- フットの呼び出し -->
+{{-- フットの呼び出し --}}
 @include('commons.foot')
 
 <script src="/js/apply/send.js"></script>
-<script src="/js/adds/item.js"></script>
 
 <script src="/js/ranking/update-table.js"></script>
+@endsection
+
+{{-- 申請のモーダル画面の呼び出し --}}
+{{-- @include('modals.add-item') --}}
